@@ -1,0 +1,26 @@
+{
+  "name": "@jeffreyo3/filter-map",
+  "author": "Jeffrey Orndorff",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "A utility that will map and filter in a single iteration of an array",
+  "type": "module",
+  "devDependencies": {
+    "jest": "^27.2.5"
+  },
+  "jest": {
+    "verbose": true
+  },
+  "scripts": {
+    "test": "jest --watch --collect-coverage"
+  },
+  "main": "filterMap.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jeffreyo3/filterMap.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Jeffreyo3/filterMap/issues"
+  },
+  "homepage": "https://github.com/Jeffreyo3/filterMap#readme"
+}
