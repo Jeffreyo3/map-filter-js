@@ -1,0 +1,26 @@
+{
+  "name": "js-map-filter",
+  "author": "jeffreyo3",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "A utility that will filter and possibly transform in a single iteration of an array",
+  "type": "module",
+  "devDependencies": {
+    "jest": "^27.2.5"
+  },
+  "jest": {
+    "verbose": true
+  },
+  "scripts": {
+    "test": "jest --watchAll --coverage"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jeffreyo3/js-map-filter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Jeffreyo3/js-map-filter/issues"
+  },
+  "homepage": "https://github.com/Jeffreyo3/js-map-filter#readme"
+}
