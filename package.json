@@ -1,7 +1,7 @@
 {
   "name": "filter-map",
   "author": "jeffreyo3",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "MIT",
   "description": "A utility that will filter and possibly transform in a single iteration of an array",
   "type": "module",
