@@ -1,6 +1,15 @@
-# Map Filter
+# Map-Filter-JS
 
-Map Filter is a generic JavaScript utililty designed to `filter` and possibly transform data (like `Array.prototype.map`) in a single iteration.
+`mapFilter` is a generic JavaScript utililty designed to `filter` and possibly transform data (like `Array.prototype.map()`) in a single iteration.
+
+Its not entirely necessary to use this package, as this can be accomplished using `Array.prototype.reduce()` ([StackOverflow](https://stackoverflow.com/questions/57701306/using-reduce-instead-of-chaining-filter-and-map))
+```
+array.reduce((total, current) => predicate ? [...total, newObject] : total, []);
+```
+
+I find this method to be somewhat difficult to read especially when the predicates or return objects become more complicated.
+
+This package allows the user to take in the `filter` to evaluate the predicate, and the `template` used to create the return objects separately.
 
 ---
 
