@@ -1,15 +1,15 @@
 /**
- * Returns the elements of an array in the shape specified in the callback function that meet the condition specified in the predicate callback function.
+ * Returns the elements of an array in the shape specified in the callback function that meet the condition specified in the filter callback function.
  * @param {Array} array An array of elements to be filterMapped
- * @param {(element: any, index?: number) => any} predicate A function that accepts up to two arguments. The filter method calls
- * the predicate function one time for each element in the array.
+ * @param {(element: any, index?: number) => any} filter A function that accepts up to two arguments. The filter method calls
+ * the filter function one time for each element in the array.
  * @param {(element: any, index?: number) => any} template A function that accepts up to two arguments. The map method calls the
- * template function one time for each element in the array that has a truthy `predicate`.
+ * template function one time for each element in the array that has a truthy predicate from the `filter`.
  */
-function filterMap(array, predicate, template) {
+function filterMap(array, filter, template) {
   // Check Types
   checkArray(array);
-  checkFunction(predicate);
+  checkFunction(filter);
   checkFunction(template);
 
   // Base Case
@@ -18,15 +18,15 @@ function filterMap(array, predicate, template) {
   }
 
   // Check Args
-  checkCallbackArgsLength(predicate);
+  checkCallbackArgsLength(filter);
   checkCallbackArgsLength(template);
 
   const newArray = [];
-  const runningPredicate = (element, index) => {
-    if (predicate.length === 1) {
-      return predicate(element);
+  const runningFilter = (element, index) => {
+    if (filter.length === 1) {
+      return filter(element);
     } else {
-      return predicate(element, index);
+      return filter(element, index);
     }
   };
 
@@ -40,7 +40,7 @@ function filterMap(array, predicate, template) {
 
   for (let index = 0; index < array.length; index++) {
     const element = array[index];
-    if (runningPredicate(element, index)) {
+    if (runningFilter(element, index)) {
       newArray.push(runningCallbackfn(element, index));
     }
   }

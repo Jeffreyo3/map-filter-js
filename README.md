@@ -19,7 +19,7 @@ Filter Map is a generic JavaScript utililty designed to `filter` and possibly tr
 
 - array -- An Array of any size to be iterated through
 
-- predicate -- A callback that takes in an element (and optionally the index) to filter whether the element should be included in the new Array
+- filter -- A callback that takes in an element (and optionally the index) to filter whether the element should be included in the new Array
 
 - template -- A callback that takes in an element (and optionally the index) and returns the desired shape of the filtered elements.
 
@@ -28,11 +28,11 @@ Ex:
 ```
 const array = [1, 3, 5, 7, 9, 11, 13]
 
-const predicate = (element, index) => element > 5
+const filter = (element, index) => element > 5
 
 const template = (element, index) => `The number ${element} is greater than 5.`
 
-const results = filterMap(array, predicate, template)
+const results = filterMap(array, filter, template)
 
 //////////////////// results ////////////////////
 [

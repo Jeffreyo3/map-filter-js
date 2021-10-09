@@ -9,7 +9,7 @@ const originalArray = [
   { name: "item4", value: 222 },
 ];
 
-const predicate = (element, index) => {
+const filter = (element, index) => {
   return element.value < 100 || index === 4;
 };
 
@@ -19,45 +19,45 @@ const template = (element, index) => {
 
 describe("filterMap", () => {
   it("throws when not given an Array", () => {
-    expect(() => filterMap({}, predicate, template)).toThrow(
+    expect(() => filterMap({}, filter, template)).toThrow(
       "arg expected to be an Array, but got Object"
     );
   });
 
   it("returns empty Array when given an empty Array", () => {
-    expect(filterMap([], predicate, template)).toEqual([]);
+    expect(filterMap([], filter, template)).toEqual([]);
   });
 
-  it("throws when given an invalid predicate callback", () => {
+  it("throws when given an invalid filter callback", () => {
     expect(() => filterMap(originalArray, () => true, template)).toThrow(
       "Anonymous func can only have 1 or 2 args, but found 0"
     );
 
-    const invalidPredicate = (element, index, any) => true;
+    const invalidFilter = (element, index, any) => true;
 
-    expect(() => filterMap(originalArray, invalidPredicate, template)).toThrow(
-      "invalidPredicate func can only have 1 or 2 args, but found 3"
+    expect(() => filterMap(originalArray, invalidFilter, template)).toThrow(
+      "invalidFilter func can only have 1 or 2 args, but found 3"
     );
   });
 
   it("throws when given an invalid template callback", () => {
     expect(() =>
-      filterMap(originalArray, predicate, () => new Object())
+      filterMap(originalArray, filter, () => new Object())
     ).toThrow("Anonymous func can only have 1 or 2 args, but found 0");
 
     const invalidTemplate = (element, index, any) => new Object();
 
-    expect(() => filterMap(originalArray, predicate, invalidTemplate)).toThrow(
+    expect(() => filterMap(originalArray, filter, invalidTemplate)).toThrow(
       "invalidTemplate func can only have 1 or 2 args, but found 3"
     );
   });
 
-  it("filters based on the predicate callback", () => {
-    let filteredArray = filterMap(originalArray, predicate, template);
+  it("filters based on the filter callback", () => {
+    let filteredArray = filterMap(originalArray, filter, template);
     expect(filteredArray.length).toEqual(3);
 
-    const predicateOnlyElement = (element) => element.value > 100;
-    filteredArray = filterMap(originalArray, predicateOnlyElement, template);
+    const filterOnlyElement = (element) => element.value > 100;
+    filteredArray = filterMap(originalArray, filterOnlyElement, template);
     expect(filteredArray.length).toEqual(3);
   });
 
@@ -67,12 +67,12 @@ describe("filterMap", () => {
       { name: "item2", value: 10, originalIndex: 2 },
       { name: "item4", value: 222, originalIndex: 4 },
     ];
-    let filteredArray = filterMap(originalArray, predicate, template);
+    let filteredArray = filterMap(originalArray, filter, template);
     expect(filteredArray).toEqual(expectedArray);
 
     expectedArray = ["item0", "item2", "item4"];
     const templateOnlyElement = (element) => element.name;
-    filteredArray = filterMap(originalArray, predicate, templateOnlyElement);
+    filteredArray = filterMap(originalArray, filter, templateOnlyElement);
     expect(filteredArray).toEqual(expectedArray);
   });
 });
