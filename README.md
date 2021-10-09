@@ -34,7 +34,7 @@ const template = (element, index) => `The number ${element} is greater than 5.`
 
 const results = mapFilter(array, filter, template)
 
-//////////////////// results ////////////////////
+//////////////// results ////////////////
 [
   "The number 7 is greater than 5.",
   "The number 9 is greater than 5.",
