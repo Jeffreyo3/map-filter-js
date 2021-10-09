@@ -1,9 +1,9 @@
 /**
  * Returns the elements of an array in the shape specified in the callback function that meet the condition specified in the filter callback function.
  * @param {Array} array An array of elements to be filterMapped
- * @param {(element: any, index?: number) => any} filter A function that accepts up to two arguments. The filter method calls
+ * @param {(element: any, index?: number) => any} filter A function that accepts up to two arguments. The mapFilter method calls
  * the filter function one time for each element in the array.
- * @param {(element: any, index?: number) => any} template A function that accepts up to two arguments. The map method calls the
+ * @param {(element: any, index?: number) => any} template A function that accepts up to two arguments. The mapFilter method calls the
  * template function one time for each element in the array that has a truthy predicate from the `filter`.
  */
 function mapFilter(array, filter, template) {
