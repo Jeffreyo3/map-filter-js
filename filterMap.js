@@ -1,15 +1,16 @@
 /**
- * Returns the elements of an array that meet the condition specified in a callback function.
- * @param predicate A function that accepts up to two arguments. The filter method calls
+ * Returns the elements of an array in the shape specified in the callback function that meet the condition specified in the predicate callback function.
+ * @param {Array} array An array of elements to be filterMapped
+ * @param {(element: any, index?: number) => any} predicate A function that accepts up to two arguments. The filter method calls
  * the predicate function one time for each element in the array.
- * @param callbackfn A function that accepts up to two arguments. The map method calls the
- * callbackfn function one time for each element in the array.
+ * @param {(element: any, index?: number) => any} template A function that accepts up to two arguments. The map method calls the
+ * template function one time for each element in the array that has a truthy `predicate`.
  */
-function filterMap(array, predicate, callbackfn) {
+function filterMap(array, predicate, template) {
   // Check Types
   checkArray(array);
   checkFunction(predicate);
-  checkFunction(callbackfn);
+  checkFunction(template);
 
   // Base Case
   if (array.length === 0) {
@@ -18,7 +19,7 @@ function filterMap(array, predicate, callbackfn) {
 
   // Check Args
   checkCallbackArgsLength(predicate);
-  checkCallbackArgsLength(callbackfn);
+  checkCallbackArgsLength(template);
 
   const newArray = [];
   const runningPredicate = (element, index) => {
@@ -30,10 +31,10 @@ function filterMap(array, predicate, callbackfn) {
   };
 
   const runningCallbackfn = (element, index) => {
-    if (callbackfn.length === 1) {
-      return callbackfn(element);
+    if (template.length === 1) {
+      return template(element);
     } else {
-      return callbackfn(element, index);
+      return template(element, index);
     }
   };
 
@@ -49,7 +50,7 @@ function filterMap(array, predicate, callbackfn) {
 
 const checkArgument = (predicate, errorMessage) => {
   if (predicate === false) {
-      throw new Error(errorMessage);
+    throw new Error(errorMessage);
   }
 };
 
@@ -63,15 +64,19 @@ const checkArray = (array) => {
 const checkFunction = (func) => {
   checkArgument(
     func instanceof Function,
-    `${func.name ? func.name : "Anonymous"} arg expected to be a Function, but got ${func.constructor.name}`
+    `${
+      func.name ? func.name : "Anonymous"
+    } arg expected to be a Function, but got ${func.constructor.name}`
   );
 };
 
 const checkCallbackArgsLength = (func) => {
   checkArgument(
     func.length === 1 || func.length === 2,
-    `${func.name ? func.name : "Anonymous"} func can only have 1 or 2 args, but found ${func.length}`
+    `${
+      func.name ? func.name : "Anonymous"
+    } func can only have 1 or 2 args, but found ${func.length}`
   );
 };
 
-module.exports = filterMap
+module.exports = filterMap;
