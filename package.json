@@ -17,10 +17,10 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jeffreyo3/js-map-filter.git"
+    "url": "git+https://github.com/Jeffreyo3/map-filter-js.git"
   },
   "bugs": {
-    "url": "https://github.com/Jeffreyo3/js-map-filter/issues"
+    "url": "https://github.com/Jeffreyo3/map-filter-js/issues"
   },
-  "homepage": "https://github.com/Jeffreyo3/js-map-filter#readme"
+  "homepage": "https://github.com/Jeffreyo3/map-filter-js#readme"
 }

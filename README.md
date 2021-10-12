@@ -15,10 +15,10 @@ This package allows the user to take in the `filter` to evaluate the predicate, 
 
 ### Installation
 
-- run: `npm i js-map-filter`
+- run: `npm i map-filter-js`
 - import:
-  - JavaScript: `import mapFilter from "js-map-filter";`
-  - NodeJS: `const mapFilter = require("js-map-filter")`
+  - JavaScript: `import mapFilter from "map-filter-js";`
+  - NodeJS: `const mapFilter = require("map-filter-js")`
 
 ---
 
