@@ -17,8 +17,8 @@ This package allows the user to take in the `filter` to evaluate the predicate, 
 
 - run: `npm i map-filter-js`
 - import:
-  - JavaScript: `import mapFilter from "map-filter-js";`
-  - NodeJS: `const mapFilter = require("map-filter-js")`
+  - ES5: `const mapFilter = require("map-filter-js")`
+  - ES6: `import mapFilter from "map-filter-js";`
 
 ---
 
