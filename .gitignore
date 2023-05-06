@@ -1,2 +1,29 @@
-node_modules
+# Node.js modules
+node_modules/
+
+# Build artifacts
+dist/
+build/
+out/
+
+# Editor-specific files
+.vscode/
+.idea/
+.sublime/
+
+# Log files
+*.log
+logs/
+log/
+
+# User-specific files
+.env
+.env.local
+.env.*.local
+
+# Cache files
+*.cache
+.cache/
+.gradle/
+.yarn-cache/
 coverage
