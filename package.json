@@ -1,7 +1,7 @@
 {
   "name": "map-filter-js",
   "author": "jeffreyo3",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "description": "A utility that will filter and possibly transform in a single iteration of an array",
   "type": "module",
