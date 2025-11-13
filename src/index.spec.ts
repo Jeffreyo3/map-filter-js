@@ -1,4 +1,4 @@
-import { mapFilter } from "./index";
+import mapFilter from "./index";
 
 type TestObject = {
   name: string;

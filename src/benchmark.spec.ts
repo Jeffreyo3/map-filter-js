@@ -1,6 +1,20 @@
-import { mapFilter, filterMap } from "./index";
+import mapFilter from "./index";
 import * as fs from "fs";
 import * as path from "path";
+
+// Reducer-based filter-map implementation for comparison
+function reduceFilterMap<T, U>(
+  array: T[],
+  filter: (element: T, index?: number) => boolean,
+  mapper: (element: T, index?: number) => U
+): U[] {
+  return array.reduce<U[]>((acc, element, index) => {
+    if (filter(element, index)) {
+      acc.push(mapper(element, index));
+    }
+    return acc;
+  }, []);
+}
 
 // Global results collector
 const benchmarkResults: any = {
@@ -120,9 +134,9 @@ describe("Performance Benchmarks", () => {
             iterations,
           },
           {
-            name: "filterMap",
+            name: "reduceFilterMap",
             fn: () => {
-              result2 = filterMap(testArray, isEven, double);
+              result2 = reduceFilterMap(testArray, isEven, double);
             },
             iterations,
           },
@@ -193,9 +207,9 @@ describe("Performance Benchmarks", () => {
             iterations,
           },
           {
-            name: "filterMap",
+            name: "reduceFilterMap",
             fn: () => {
-              result2 = filterMap(testArray, filter, double);
+              result2 = reduceFilterMap(testArray, filter, double);
             },
             iterations,
           },
@@ -293,9 +307,9 @@ describe("Performance Benchmarks", () => {
             iterations,
           },
           {
-            name: "filterMap",
+            name: "reduceFilterMap",
             fn: () => {
-              result2 = filterMap(sparseArray, isNumber, double);
+              result2 = reduceFilterMap(sparseArray, isNumber, double);
             },
             iterations,
           },
@@ -311,14 +325,14 @@ describe("Performance Benchmarks", () => {
         runBenchmarkSuite(testName, testParams, benchmarkFns);
 
         // Verify results
-        expect(result2).toEqual(result3); // filterMap should match native behavior
+        expect(result2).toEqual(result3); // reduceFilterMap should match native behavior
 
         // Note: result1 might be different if mapFilter doesn't handle holes properly
         if (result1.length !== result2.length) {
           // Record difference in test params for JSON output
           (testParams as any).holeHandlingDifference = {
             mapFilterResults: result1.length,
-            filterMapResults: result2.length,
+            reduceFilterMapResults: result2.length,
             nativeResults: result3.length,
           };
         }
@@ -359,9 +373,9 @@ describe("Performance Benchmarks", () => {
           iterations,
         },
         {
-          name: "filterMap",
+          name: "reduceFilterMap",
           fn: () => {
-            result2 = filterMap(testArray, filter, mapper);
+            result2 = reduceFilterMap(testArray, filter, mapper);
           },
           iterations,
         },
@@ -443,9 +457,9 @@ describe("Performance Benchmarks", () => {
           iterations,
         },
         {
-          name: "filterMap",
+          name: "reduceFilterMap",
           fn: () => {
-            result2 = filterMap(testArray, filter, mapper);
+            result2 = reduceFilterMap(testArray, filter, mapper);
           },
           iterations,
         },
@@ -528,9 +542,9 @@ describe("Performance Benchmarks", () => {
           iterations,
         },
         {
-          name: "filterMap",
+          name: "reduceFilterMap",
           fn: () => {
-            result2 = filterMap(testArray, filter, mapper);
+            result2 = reduceFilterMap(testArray, filter, mapper);
           },
           iterations,
         },
@@ -589,9 +603,9 @@ describe("Performance Benchmarks", () => {
           iterations,
         },
         {
-          name: "filterMap",
+          name: "reduceFilterMap",
           fn: () => {
-            result2 = filterMap(
+            result2 = reduceFilterMap(
               testArray,
               singleParamFilter,
               singleParamMapper
@@ -635,7 +649,7 @@ describe("Performance Benchmarks", () => {
         iterations,
         testType: "Dual Parameter Functions",
         description:
-          "Functions with dual parameters - mapFilter should pass index, filterMap always passes both",
+          "Functions with dual parameters - mapFilter should pass index, reduceFilterMap always passes both",
       };
 
       const benchmarkFns = [
@@ -647,9 +661,13 @@ describe("Performance Benchmarks", () => {
           iterations,
         },
         {
-          name: "filterMap",
+          name: "reduceFilterMap",
           fn: () => {
-            result2 = filterMap(testArray, dualParamFilter, dualParamMapper);
+            result2 = reduceFilterMap(
+              testArray,
+              dualParamFilter,
+              dualParamMapper
+            );
           },
           iterations,
         },
@@ -697,9 +715,9 @@ describe("Performance Benchmarks", () => {
           iterations,
         },
         {
-          name: "filterMap",
+          name: "reduceFilterMap",
           fn: () => {
-            result2 = filterMap(testArray, trivialFilter, trivialMapper);
+            result2 = reduceFilterMap(testArray, trivialFilter, trivialMapper);
           },
           iterations,
         },
@@ -757,11 +775,11 @@ describe("Performance Benchmarks", () => {
           iterations,
         },
         {
-          name: "filterMap",
+          name: "reduceFilterMap",
           fn: () => {
             const filterFn = filterWithDifferentLengths[0];
             const mapperFn = mapperWithDifferentLengths[1];
-            result2 = filterMap(testArray, filterFn, mapperFn);
+            result2 = reduceFilterMap(testArray, filterFn, mapperFn);
           },
           iterations,
         },

@@ -17,13 +17,16 @@
     "verbose": true,
     "preset": "ts-jest",
     "testEnvironment": "node",
-    "testMatch": ["**/*.spec.ts"]
+    "testMatch": [
+      "**/*.spec.ts"
+    ]
   },
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
     "prepublishOnly": "npm run build",
-    "test": "jest --watchAll --coverage"
+    "test": "jest --coverage",
+    "test:watch": "jest --watchAll"
   },
   "main": "dist/index.js",
   "repository": {
