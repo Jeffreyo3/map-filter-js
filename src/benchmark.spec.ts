@@ -1,9 +1,9 @@
+import { writeFileSync } from "fs";
+import path from "path";
 import mapFilter from "./index";
-import * as fs from "fs";
-import * as path from "path";
 
 // Reducer-based filter-map implementation for comparison
-function reduceFilterMap<T, U>(
+function reduce<T, U>(
   array: T[],
   filter: (element: T, index?: number) => boolean,
   mapper: (element: T, index?: number) => U
@@ -22,7 +22,7 @@ const benchmarkResults: any = {
   tests: [],
 };
 
-// Enhanced benchmark utility function
+// Benchmark utility function
 function benchmark(
   name: string,
   fn: () => void,
@@ -38,7 +38,7 @@ function benchmark(
   return totalTime;
 }
 
-// Function to run benchmarks and collect results
+// Function to run benchmarks and collect results (runs each test 5 times and reports averages)
 function runBenchmarkSuite(
   testName: string,
   testParams: any,
@@ -52,23 +52,43 @@ function runBenchmarkSuite(
   };
 
   benchmarkFns.forEach(({ name, fn, iterations }) => {
-    const time = benchmark(name, fn, iterations);
+    const RUNS = 10;
+    const times: number[] = [];
+
+    for (let run = 0; run < RUNS; run++) {
+      const time = benchmark(name, fn, iterations);
+      times.push(time);
+    }
+
+    // Calculate statistics
+    const totalTime = times.reduce((sum, time) => sum + time, 0) / RUNS;
+    const avgTime = totalTime / iterations;
+    const minTime = Math.min(...times);
+    const maxTime = Math.max(...times);
+    const stdDev = Math.sqrt(
+      times.reduce((sum, time) => sum + Math.pow(time - totalTime, 2), 0) / RUNS
+    );
+
     results.results.push({
       function: name,
-      totalTime: parseFloat(time.toFixed(4)),
-      avgTime: parseFloat((time / iterations).toFixed(4)),
+      totalTime: parseFloat(totalTime.toFixed(4)),
+      avgTime: parseFloat(avgTime.toFixed(4)),
       iterations,
+      runs: RUNS,
+      minTime: parseFloat(minTime.toFixed(4)),
+      maxTime: parseFloat(maxTime.toFixed(4)),
+      stdDev: parseFloat(stdDev.toFixed(4)),
+      rawTimes: times.map((t) => parseFloat(t.toFixed(4))),
     });
   });
 
-  // Calculate relative performance
+  // Calculate relative performance based on average total times
   const fastest = Math.min(...results.results.map((r: any) => r.totalTime));
   results.results.forEach((r: any) => {
     r.relativePerformance = parseFloat((r.totalTime / fastest).toFixed(2));
     r.isFastest = r.totalTime === fastest;
   });
 
-  // Add to global results
   benchmarkResults.tests.push(results);
 }
 
@@ -78,7 +98,7 @@ function saveBenchmarkResults(): void {
   const jsonOutput = JSON.stringify(benchmarkResults, null, 2);
 
   try {
-    fs.writeFileSync(outputPath, jsonOutput);
+    writeFileSync(outputPath, jsonOutput);
   } catch (error) {
     // If we can't write to file, output the full results to console
     // so they're not lost in environments where file writing isn't allowed
@@ -90,17 +110,14 @@ function saveBenchmarkResults(): void {
 }
 
 describe("Performance Benchmarks", () => {
-  // Save results after all tests complete
   afterAll(() => {
     saveBenchmarkResults();
   });
 
   describe("Array Size Scaling", () => {
-    // Test data generators
     const generateNumbers = (size: number): number[] =>
       Array.from({ length: size }, (_, i) => i + 1);
 
-    // Simple filter and map functions for consistent testing
     const isEven = (n: number): boolean => n % 2 === 0;
     const double = (n: number): number => n * 2;
 
@@ -121,8 +138,6 @@ describe("Performance Benchmarks", () => {
         const testParams = {
           arraySize: size,
           iterations,
-          filterType: "isEven",
-          mapType: "double",
         };
 
         const benchmarkFns = [
@@ -134,9 +149,9 @@ describe("Performance Benchmarks", () => {
             iterations,
           },
           {
-            name: "reduceFilterMap",
+            name: "native .reduce()",
             fn: () => {
-              result2 = reduceFilterMap(testArray, isEven, double);
+              result2 = reduce(testArray, isEven, double);
             },
             iterations,
           },
@@ -151,7 +166,6 @@ describe("Performance Benchmarks", () => {
 
         runBenchmarkSuite(testName, testParams, benchmarkFns);
 
-        // Verify results are identical
         expect(result1).toEqual(result2);
         expect(result1).toEqual(result3);
       });
@@ -162,24 +176,23 @@ describe("Performance Benchmarks", () => {
     const testSize = 10000;
     const iterations = 100;
 
-    // Generate test data
     const testArray = Array.from({ length: testSize }, (_, i) => i + 1);
     const double = (n: number): number => n * 2;
 
     const selectivityTests = [
       {
         name: "High Selectivity (10% pass)",
-        filter: (n: number): boolean => n % 10 === 0, // Every 10th element
+        filter: (n: number): boolean => n % 10 === 0,
         expectedPassRate: 0.1,
       },
       {
         name: "Medium Selectivity (50% pass)",
-        filter: (n: number): boolean => n % 2 === 0, // Every 2nd element
+        filter: (n: number): boolean => n % 2 === 0,
         expectedPassRate: 0.5,
       },
       {
         name: "Low Selectivity (90% pass)",
-        filter: (n: number): boolean => n % 10 !== 1, // All except every 10th+1 element
+        filter: (n: number): boolean => n % 10 !== 1,
         expectedPassRate: 0.9,
       },
     ];
@@ -195,7 +208,6 @@ describe("Performance Benchmarks", () => {
           arraySize: testSize,
           iterations,
           expectedPassRate,
-          filterDescription: name,
         };
 
         const benchmarkFns = [
@@ -207,9 +219,9 @@ describe("Performance Benchmarks", () => {
             iterations,
           },
           {
-            name: "reduceFilterMap",
+            name: "native .reduce()",
             fn: () => {
-              result2 = reduceFilterMap(testArray, filter, double);
+              result2 = reduce(testArray, filter, double);
             },
             iterations,
           },
@@ -224,11 +236,9 @@ describe("Performance Benchmarks", () => {
 
         runBenchmarkSuite(testName, testParams, benchmarkFns);
 
-        // Verify results are identical
         expect(result1).toEqual(result2);
         expect(result1).toEqual(result3);
 
-        // Verify expected pass rate
         const actualPassRate = result1.length / testSize;
         expect(actualPassRate).toBeCloseTo(expectedPassRate, 2);
       });
@@ -279,7 +289,6 @@ describe("Performance Benchmarks", () => {
 
     sparseTests.forEach(({ name, holePercent }) => {
       it(`should benchmark ${name.toLowerCase()}`, () => {
-        // Generate sparse array once
         const sparseArray = createSparseArray(testSize, holePercent);
         const definedElements = sparseArray.filter(
           (x) => x !== undefined
@@ -295,7 +304,6 @@ describe("Performance Benchmarks", () => {
           iterations,
           holePercent,
           definedElements,
-          sparsityDescription: name,
         };
 
         const benchmarkFns = [
@@ -307,9 +315,9 @@ describe("Performance Benchmarks", () => {
             iterations,
           },
           {
-            name: "reduceFilterMap",
+            name: "native .reduce()",
             fn: () => {
-              result2 = reduceFilterMap(sparseArray, isNumber, double);
+              result2 = reduce(sparseArray, isNumber, double);
             },
             iterations,
           },
@@ -324,15 +332,14 @@ describe("Performance Benchmarks", () => {
 
         runBenchmarkSuite(testName, testParams, benchmarkFns);
 
-        // Verify results
-        expect(result2).toEqual(result3); // reduceFilterMap should match native behavior
+        expect(result2).toEqual(result3);
 
         // Note: result1 might be different if mapFilter doesn't handle holes properly
         if (result1.length !== result2.length) {
           // Record difference in test params for JSON output
           (testParams as any).holeHandlingDifference = {
             mapFilterResults: result1.length,
-            reduceFilterMapResults: result2.length,
+            reduceResults: result2.length,
             nativeResults: result3.length,
           };
         }
@@ -373,9 +380,9 @@ describe("Performance Benchmarks", () => {
           iterations,
         },
         {
-          name: "reduceFilterMap",
+          name: "native .reduce()",
           fn: () => {
-            result2 = reduceFilterMap(testArray, filter, mapper);
+            result2 = reduce(testArray, filter, mapper);
           },
           iterations,
         },
@@ -416,13 +423,13 @@ describe("Performance Benchmarks", () => {
           id: i + 1,
           name: `User ${i + 1}`,
           email: `user${i + 1}@example.com`,
-          age: 20 + (i % 60), // Ages 20-79
-          active: i % 3 !== 0, // ~67% active users
+          age: 20 + (i % 60),
+          active: i % 3 !== 0,
           metadata: {
             lastLogin: new Date(2024, i % 12, (i % 28) + 1).toISOString(),
             preferences: {
               theme: i % 2 === 0 ? "dark" : "light",
-              notifications: i % 4 !== 0, // ~75% have notifications enabled
+              notifications: i % 4 !== 0,
             },
           },
         }));
@@ -457,9 +464,9 @@ describe("Performance Benchmarks", () => {
           iterations,
         },
         {
-          name: "reduceFilterMap",
+          name: "native .reduce()",
           fn: () => {
-            result2 = reduceFilterMap(testArray, filter, mapper);
+            result2 = reduce(testArray, filter, mapper);
           },
           iterations,
         },
@@ -474,7 +481,6 @@ describe("Performance Benchmarks", () => {
 
       runBenchmarkSuite(testName, testParams, benchmarkFns);
 
-      // Verify results are identical
       expect(result1).toEqual(result2);
       expect(result1).toEqual(result3);
     });
@@ -542,9 +548,9 @@ describe("Performance Benchmarks", () => {
           iterations,
         },
         {
-          name: "reduceFilterMap",
+          name: "native .reduce()",
           fn: () => {
-            result2 = reduceFilterMap(testArray, filter, mapper);
+            result2 = reduce(testArray, filter, mapper);
           },
           iterations,
         },
@@ -559,7 +565,6 @@ describe("Performance Benchmarks", () => {
 
       runBenchmarkSuite(testName, testParams, benchmarkFns);
 
-      // Verify results are identical
       expect(result1).toEqual(result2);
       expect(result1).toEqual(result3);
     });
@@ -573,7 +578,6 @@ describe("Performance Benchmarks", () => {
       // Create functions with different parameter counts to test mapFilter's function.length checking
       const testArray = Array.from({ length: testSize }, (_, i) => i + 1);
 
-      // Single parameter functions (mapFilter should optimize these)
       const singleParamFilter = (n: number) => n % 2 === 0;
       const singleParamMapper = (n: number) => n * 2;
 
@@ -587,7 +591,7 @@ describe("Performance Benchmarks", () => {
         iterations,
         testType: "Single Parameter Functions",
         description:
-          "Functions with single parameters - mapFilter should optimize these with function.length checking",
+          "Functions with single parameters - mapFilter should optimize these",
       };
 
       const benchmarkFns = [
@@ -603,13 +607,9 @@ describe("Performance Benchmarks", () => {
           iterations,
         },
         {
-          name: "reduceFilterMap",
+          name: "native .reduce()",
           fn: () => {
-            result2 = reduceFilterMap(
-              testArray,
-              singleParamFilter,
-              singleParamMapper
-            );
+            result2 = reduce(testArray, singleParamFilter, singleParamMapper);
           },
           iterations,
         },
@@ -649,7 +649,7 @@ describe("Performance Benchmarks", () => {
         iterations,
         testType: "Dual Parameter Functions",
         description:
-          "Functions with dual parameters - mapFilter should pass index, reduceFilterMap always passes both",
+          "Functions with dual parameters - mapFilter should pass index, reduce always passes both",
       };
 
       const benchmarkFns = [
@@ -661,13 +661,9 @@ describe("Performance Benchmarks", () => {
           iterations,
         },
         {
-          name: "reduceFilterMap",
+          name: "native .reduce()",
           fn: () => {
-            result2 = reduceFilterMap(
-              testArray,
-              dualParamFilter,
-              dualParamMapper
-            );
+            result2 = reduce(testArray, dualParamFilter, dualParamMapper);
           },
           iterations,
         },
@@ -690,8 +686,8 @@ describe("Performance Benchmarks", () => {
       const testArray = Array.from({ length: testSize }, (_, i) => i + 1);
 
       // Extremely simple functions to isolate pure call overhead
-      const trivialFilter = (n: number) => true; // Always passes
-      const trivialMapper = (n: number) => n; // Identity function
+      const trivialFilter = (n: number) => true;
+      const trivialMapper = (n: number) => n;
 
       let result1: number[] = [];
       let result2: number[] = [];
@@ -715,9 +711,9 @@ describe("Performance Benchmarks", () => {
           iterations,
         },
         {
-          name: "reduceFilterMap",
+          name: "native .reduce()",
           fn: () => {
-            result2 = reduceFilterMap(testArray, trivialFilter, trivialMapper);
+            result2 = reduce(testArray, trivialFilter, trivialMapper);
           },
           iterations,
         },
@@ -741,13 +737,13 @@ describe("Performance Benchmarks", () => {
 
       // Functions that should trigger different code paths in mapFilter
       const filterWithDifferentLengths = [
-        (n: number) => n % 2 === 0, // length = 1
-        (n: number, _?: number) => n % 2 === 0, // length = 2
+        (n: number) => n % 2 === 0,
+        (n: number, _?: number) => n % 2 === 0,
       ];
 
       const mapperWithDifferentLengths = [
-        (n: number) => n * 2, // length = 1
-        (n: number, _?: number) => n * 2, // length = 2
+        (n: number) => n * 2,
+        (n: number, _?: number) => n * 2,
       ];
 
       let result1: number[] = [];
@@ -769,17 +765,17 @@ describe("Performance Benchmarks", () => {
           fn: () => {
             // Alternate between different function lengths to stress the checking
             const filterFn = filterWithDifferentLengths[0];
-            const mapperFn = mapperWithDifferentLengths[1]; // Mix lengths
+            const mapperFn = mapperWithDifferentLengths[1];
             result1 = mapFilter(testArray, filterFn, mapperFn);
           },
           iterations,
         },
         {
-          name: "reduceFilterMap",
+          name: "native .reduce()",
           fn: () => {
             const filterFn = filterWithDifferentLengths[0];
             const mapperFn = mapperWithDifferentLengths[1];
-            result2 = reduceFilterMap(testArray, filterFn, mapperFn);
+            result2 = reduce(testArray, filterFn, mapperFn);
           },
           iterations,
         },

@@ -19,11 +19,6 @@ function mapFilter<T, U>(
     throw new TypeError("First argument must be an array");
   }
 
-  // Base Case
-  if (array.length === 0) {
-    return [];
-  }
-
   const newArray: U[] = [];
   for (let i = 0; i < array.length; i++) {
     // Skip holes in the array (e.g., [, , 1, , 2])
