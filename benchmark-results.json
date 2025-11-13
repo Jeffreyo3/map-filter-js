@@ -1,0 +1,584 @@
+{
+  "timestamp": "2025-11-13T09:33:18.475Z",
+  "tests": [
+    {
+      "testName": "Array Size Scaling - Small (100 elements)",
+      "testParams": {
+        "arraySize": 100,
+        "iterations": 1000,
+        "filterType": "isEven",
+        "mapType": "double"
+      },
+      "results": [
+        {
+          "function": "mapFilter",
+          "totalTime": 14.0157,
+          "avgTime": 0.014,
+          "iterations": 1000,
+          "relativePerformance": 5.36,
+          "isFastest": false
+        },
+        {
+          "function": "filterMap",
+          "totalTime": 7.4402,
+          "avgTime": 0.0074,
+          "iterations": 1000,
+          "relativePerformance": 2.85,
+          "isFastest": false
+        },
+        {
+          "function": "native filter().map()",
+          "totalTime": 2.6128,
+          "avgTime": 0.0026,
+          "iterations": 1000,
+          "relativePerformance": 1,
+          "isFastest": true
+        }
+      ],
+      "timestamp": "2025-11-13T09:33:18.534Z"
+    },
+    {
+      "testName": "Array Size Scaling - Medium (10,000 elements)",
+      "testParams": {
+        "arraySize": 10000,
+        "iterations": 100,
+        "filterType": "isEven",
+        "mapType": "double"
+      },
+      "results": [
+        {
+          "function": "mapFilter",
+          "totalTime": 52.3834,
+          "avgTime": 0.5238,
+          "iterations": 100,
+          "relativePerformance": 3.97,
+          "isFastest": false
+        },
+        {
+          "function": "filterMap",
+          "totalTime": 13.1885,
+          "avgTime": 0.1319,
+          "iterations": 100,
+          "relativePerformance": 1,
+          "isFastest": true
+        },
+        {
+          "function": "native filter().map()",
+          "totalTime": 22.1006,
+          "avgTime": 0.221,
+          "iterations": 100,
+          "relativePerformance": 1.68,
+          "isFastest": false
+        }
+      ],
+      "timestamp": "2025-11-13T09:33:18.562Z"
+    },
+    {
+      "testName": "Array Size Scaling - Large (1,000,000 elements)",
+      "testParams": {
+        "arraySize": 1000000,
+        "iterations": 10,
+        "filterType": "isEven",
+        "mapType": "double"
+      },
+      "results": [
+        {
+          "function": "mapFilter",
+          "totalTime": 443.5609,
+          "avgTime": 44.3561,
+          "iterations": 10,
+          "relativePerformance": 3.38,
+          "isFastest": false
+        },
+        {
+          "function": "filterMap",
+          "totalTime": 131.2307,
+          "avgTime": 13.1231,
+          "iterations": 10,
+          "relativePerformance": 1,
+          "isFastest": true
+        },
+        {
+          "function": "native filter().map()",
+          "totalTime": 205.0397,
+          "avgTime": 20.504,
+          "iterations": 10,
+          "relativePerformance": 1.56,
+          "isFastest": false
+        }
+      ],
+      "timestamp": "2025-11-13T09:33:18.739Z"
+    },
+    {
+      "testName": "Filter Selectivity - High Selectivity (10% pass)",
+      "testParams": {
+        "arraySize": 10000,
+        "iterations": 100,
+        "expectedPassRate": 0.1,
+        "filterDescription": "High Selectivity (10% pass)"
+      },
+      "results": [
+        {
+          "function": "mapFilter",
+          "totalTime": 44.0152,
+          "avgTime": 0.4402,
+          "iterations": 100,
+          "relativePerformance": 3,
+          "isFastest": false
+        },
+        {
+          "function": "filterMap",
+          "totalTime": 23.0682,
+          "avgTime": 0.2307,
+          "iterations": 100,
+          "relativePerformance": 1.57,
+          "isFastest": false
+        },
+        {
+          "function": "native filter().map()",
+          "totalTime": 14.6687,
+          "avgTime": 0.1467,
+          "iterations": 100,
+          "relativePerformance": 1,
+          "isFastest": true
+        }
+      ],
+      "timestamp": "2025-11-13T09:33:21.693Z"
+    },
+    {
+      "testName": "Filter Selectivity - Medium Selectivity (50% pass)",
+      "testParams": {
+        "arraySize": 10000,
+        "iterations": 100,
+        "expectedPassRate": 0.5,
+        "filterDescription": "Medium Selectivity (50% pass)"
+      },
+      "results": [
+        {
+          "function": "mapFilter",
+          "totalTime": 53.0396,
+          "avgTime": 0.5304,
+          "iterations": 100,
+          "relativePerformance": 2.91,
+          "isFastest": false
+        },
+        {
+          "function": "filterMap",
+          "totalTime": 21.7143,
+          "avgTime": 0.2171,
+          "iterations": 100,
+          "relativePerformance": 1.19,
+          "isFastest": false
+        },
+        {
+          "function": "native filter().map()",
+          "totalTime": 18.2188,
+          "avgTime": 0.1822,
+          "iterations": 100,
+          "relativePerformance": 1,
+          "isFastest": true
+        }
+      ],
+      "timestamp": "2025-11-13T09:33:21.780Z"
+    },
+    {
+      "testName": "Filter Selectivity - Low Selectivity (90% pass)",
+      "testParams": {
+        "arraySize": 10000,
+        "iterations": 100,
+        "expectedPassRate": 0.9,
+        "filterDescription": "Low Selectivity (90% pass)"
+      },
+      "results": [
+        {
+          "function": "mapFilter",
+          "totalTime": 66.4986,
+          "avgTime": 0.665,
+          "iterations": 100,
+          "relativePerformance": 2.51,
+          "isFastest": false
+        },
+        {
+          "function": "filterMap",
+          "totalTime": 27.083,
+          "avgTime": 0.2708,
+          "iterations": 100,
+          "relativePerformance": 1.02,
+          "isFastest": false
+        },
+        {
+          "function": "native filter().map()",
+          "totalTime": 26.4821,
+          "avgTime": 0.2648,
+          "iterations": 100,
+          "relativePerformance": 1,
+          "isFastest": true
+        }
+      ],
+      "timestamp": "2025-11-13T09:33:21.893Z"
+    },
+    {
+      "testName": "Sparse Arrays - Low Sparsity (10% holes)",
+      "testParams": {
+        "arraySize": 10000,
+        "iterations": 100,
+        "holePercent": 0.1,
+        "definedElements": 9000,
+        "sparsityDescription": "Low Sparsity (10% holes)"
+      },
+      "results": [
+        {
+          "function": "mapFilter",
+          "totalTime": 235.9757,
+          "avgTime": 2.3598,
+          "iterations": 100,
+          "relativePerformance": 1.22,
+          "isFastest": false
+        },
+        {
+          "function": "filterMap",
+          "totalTime": 202.0802,
+          "avgTime": 2.0208,
+          "iterations": 100,
+          "relativePerformance": 1.05,
+          "isFastest": false
+        },
+        {
+          "function": "native filter().map()",
+          "totalTime": 193.117,
+          "avgTime": 1.9312,
+          "iterations": 100,
+          "relativePerformance": 1,
+          "isFastest": true
+        }
+      ],
+      "timestamp": "2025-11-13T09:33:22.056Z"
+    },
+    {
+      "testName": "Sparse Arrays - Medium Sparsity (50% holes)",
+      "testParams": {
+        "arraySize": 10000,
+        "iterations": 100,
+        "holePercent": 0.5,
+        "definedElements": 5000,
+        "sparsityDescription": "Medium Sparsity (50% holes)"
+      },
+      "results": [
+        {
+          "function": "mapFilter",
+          "totalTime": 152.4625,
+          "avgTime": 1.5246,
+          "iterations": 100,
+          "relativePerformance": 1.24,
+          "isFastest": false
+        },
+        {
+          "function": "filterMap",
+          "totalTime": 122.772,
+          "avgTime": 1.2277,
+          "iterations": 100,
+          "relativePerformance": 1,
+          "isFastest": true
+        },
+        {
+          "function": "native filter().map()",
+          "totalTime": 138.0636,
+          "avgTime": 1.3806,
+          "iterations": 100,
+          "relativePerformance": 1.12,
+          "isFastest": false
+        }
+      ],
+      "timestamp": "2025-11-13T09:33:22.709Z"
+    },
+    {
+      "testName": "Sparse Arrays - High Sparsity (90% holes)",
+      "testParams": {
+        "arraySize": 10000,
+        "iterations": 100,
+        "holePercent": 0.9,
+        "definedElements": 999,
+        "sparsityDescription": "High Sparsity (90% holes)"
+      },
+      "results": [
+        {
+          "function": "mapFilter",
+          "totalTime": 75.2043,
+          "avgTime": 0.752,
+          "iterations": 100,
+          "relativePerformance": 2,
+          "isFastest": false
+        },
+        {
+          "function": "filterMap",
+          "totalTime": 39.5262,
+          "avgTime": 0.3953,
+          "iterations": 100,
+          "relativePerformance": 1.05,
+          "isFastest": false
+        },
+        {
+          "function": "native filter().map()",
+          "totalTime": 37.6542,
+          "avgTime": 0.3765,
+          "iterations": 100,
+          "relativePerformance": 1,
+          "isFastest": true
+        }
+      ],
+      "timestamp": "2025-11-13T09:33:23.148Z"
+    },
+    {
+      "testName": "Complex Objects - Simple Objects",
+      "testParams": {
+        "arraySize": 10000,
+        "iterations": 100,
+        "objectType": "Simple Objects",
+        "description": "Simple objects with id/value properties"
+      },
+      "results": [
+        {
+          "function": "mapFilter",
+          "totalTime": 302.8059,
+          "avgTime": 3.0281,
+          "iterations": 100,
+          "relativePerformance": 1.26,
+          "isFastest": false
+        },
+        {
+          "function": "filterMap",
+          "totalTime": 244.9432,
+          "avgTime": 2.4494,
+          "iterations": 100,
+          "relativePerformance": 1.02,
+          "isFastest": false
+        },
+        {
+          "function": "native filter().map()",
+          "totalTime": 239.6643,
+          "avgTime": 2.3966,
+          "iterations": 100,
+          "relativePerformance": 1,
+          "isFastest": true
+        }
+      ],
+      "timestamp": "2025-11-13T09:33:23.306Z"
+    },
+    {
+      "testName": "Complex Objects - Complex User Objects",
+      "testParams": {
+        "arraySize": 10000,
+        "iterations": 100,
+        "objectType": "Complex User Objects",
+        "description": "Complex nested objects with multiple properties"
+      },
+      "results": [
+        {
+          "function": "mapFilter",
+          "totalTime": 429.1063,
+          "avgTime": 4.2911,
+          "iterations": 100,
+          "relativePerformance": 1,
+          "isFastest": true
+        },
+        {
+          "function": "filterMap",
+          "totalTime": 534.6558,
+          "avgTime": 5.3466,
+          "iterations": 100,
+          "relativePerformance": 1.25,
+          "isFastest": false
+        },
+        {
+          "function": "native filter().map()",
+          "totalTime": 464.3227,
+          "avgTime": 4.6432,
+          "iterations": 100,
+          "relativePerformance": 1.08,
+          "isFastest": false
+        }
+      ],
+      "timestamp": "2025-11-13T09:33:24.210Z"
+    },
+    {
+      "testName": "Complex Objects - Deep Nested Objects",
+      "testParams": {
+        "arraySize": 10000,
+        "iterations": 100,
+        "objectType": "Deep Nested Objects",
+        "description": "Deeply nested objects requiring property traversal"
+      },
+      "results": [
+        {
+          "function": "mapFilter",
+          "totalTime": 219.954,
+          "avgTime": 2.1995,
+          "iterations": 100,
+          "relativePerformance": 1.14,
+          "isFastest": false
+        },
+        {
+          "function": "filterMap",
+          "totalTime": 192.9778,
+          "avgTime": 1.9298,
+          "iterations": 100,
+          "relativePerformance": 1,
+          "isFastest": false
+        },
+        {
+          "function": "native filter().map()",
+          "totalTime": 192.4313,
+          "avgTime": 1.9243,
+          "iterations": 100,
+          "relativePerformance": 1,
+          "isFastest": true
+        }
+      ],
+      "timestamp": "2025-11-13T09:33:25.893Z"
+    },
+    {
+      "testName": "Function Call Overhead - Single Parameter Functions",
+      "testParams": {
+        "arraySize": 10000,
+        "iterations": 100,
+        "testType": "Single Parameter Functions",
+        "description": "Functions with single parameters - mapFilter should optimize these with function.length checking"
+      },
+      "results": [
+        {
+          "function": "mapFilter",
+          "totalTime": 62.0969,
+          "avgTime": 0.621,
+          "iterations": 100,
+          "relativePerformance": 3.33,
+          "isFastest": false
+        },
+        {
+          "function": "filterMap",
+          "totalTime": 27.8775,
+          "avgTime": 0.2788,
+          "iterations": 100,
+          "relativePerformance": 1.5,
+          "isFastest": false
+        },
+        {
+          "function": "native filter().map()",
+          "totalTime": 18.6446,
+          "avgTime": 0.1864,
+          "iterations": 100,
+          "relativePerformance": 1,
+          "isFastest": true
+        }
+      ],
+      "timestamp": "2025-11-13T09:33:26.602Z"
+    },
+    {
+      "testName": "Function Call Overhead - Dual Parameter Functions",
+      "testParams": {
+        "arraySize": 10000,
+        "iterations": 100,
+        "testType": "Dual Parameter Functions",
+        "description": "Functions with dual parameters - mapFilter should pass index, filterMap always passes both"
+      },
+      "results": [
+        {
+          "function": "mapFilter",
+          "totalTime": 34.1651,
+          "avgTime": 0.3417,
+          "iterations": 100,
+          "relativePerformance": 3.31,
+          "isFastest": false
+        },
+        {
+          "function": "filterMap",
+          "totalTime": 15.4932,
+          "avgTime": 0.1549,
+          "iterations": 100,
+          "relativePerformance": 1.5,
+          "isFastest": false
+        },
+        {
+          "function": "native filter().map()",
+          "totalTime": 10.3346,
+          "avgTime": 0.1033,
+          "iterations": 100,
+          "relativePerformance": 1,
+          "isFastest": true
+        }
+      ],
+      "timestamp": "2025-11-13T09:33:26.732Z"
+    },
+    {
+      "testName": "Function Call Overhead - Minimal Overhead",
+      "testParams": {
+        "arraySize": 10000,
+        "iterations": 100,
+        "testType": "Minimal Overhead",
+        "description": "Trivial functions to isolate pure function call and parameter passing overhead"
+      },
+      "results": [
+        {
+          "function": "mapFilter",
+          "totalTime": 69.167,
+          "avgTime": 0.6917,
+          "iterations": 100,
+          "relativePerformance": 2.78,
+          "isFastest": false
+        },
+        {
+          "function": "filterMap",
+          "totalTime": 28.7128,
+          "avgTime": 0.2871,
+          "iterations": 100,
+          "relativePerformance": 1.15,
+          "isFastest": false
+        },
+        {
+          "function": "native filter().map()",
+          "totalTime": 24.8998,
+          "avgTime": 0.249,
+          "iterations": 100,
+          "relativePerformance": 1,
+          "isFastest": true
+        }
+      ],
+      "timestamp": "2025-11-13T09:33:26.793Z"
+    },
+    {
+      "testName": "Function Call Overhead - Function.length Checking",
+      "testParams": {
+        "arraySize": 10000,
+        "iterations": 100,
+        "testType": "Function.length Checking",
+        "description": "Mixed function lengths to test mapFilter's function.length optimization overhead"
+      },
+      "results": [
+        {
+          "function": "mapFilter",
+          "totalTime": 58.4918,
+          "avgTime": 0.5849,
+          "iterations": 100,
+          "relativePerformance": 3.16,
+          "isFastest": false
+        },
+        {
+          "function": "filterMap",
+          "totalTime": 22.041,
+          "avgTime": 0.2204,
+          "iterations": 100,
+          "relativePerformance": 1.19,
+          "isFastest": false
+        },
+        {
+          "function": "native filter().map()",
+          "totalTime": 18.5164,
+          "avgTime": 0.1852,
+          "iterations": 100,
+          "relativePerformance": 1,
+          "isFastest": true
+        }
+      ],
+      "timestamp": "2025-11-13T09:33:26.957Z"
+    }
+  ]
+}
