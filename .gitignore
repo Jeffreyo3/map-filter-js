@@ -3,6 +3,7 @@ node_modules/
 
 # Build artifacts
 dist/
+dist-cjs/
 build/
 out/
 
@@ -27,3 +28,6 @@ log/
 .gradle/
 .yarn-cache/
 coverage
+
+# Benchmark results
+benchmarks/benchmark-results.json
