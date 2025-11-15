@@ -27,3 +27,6 @@ log/
 .gradle/
 .yarn-cache/
 coverage
+
+# Benchmark results
+benchmarks/benchmark-results.json

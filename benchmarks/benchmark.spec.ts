@@ -1,6 +1,6 @@
 import { writeFileSync } from "fs";
 import path from "path";
-import mapFilter from "./index";
+import mapFilter from "../src/index";
 
 // Reducer-based filter-map implementation for comparison
 function reduce<T, U>(
@@ -65,6 +65,22 @@ function runBenchmarkSuite(
       times.reduce((sum, time) => sum + Math.pow(time - totalTime, 2), 0) / RUNS
     );
 
+    // Calculate additional statistical metrics
+    const sortedTimes = times.slice().sort((a, b) => a - b);
+    const median =
+      sortedTimes.length % 2 === 0
+        ? (sortedTimes[sortedTimes.length / 2 - 1] +
+            sortedTimes[sortedTimes.length / 2]) /
+          2
+        : sortedTimes[Math.floor(sortedTimes.length / 2)];
+
+    // Coefficient of Variation (lower = more consistent)
+    const coefficientOfVariation = totalTime > 0 ? stdDev / totalTime : 0;
+
+    // Robust Score (lower = better performance with consistency)
+    const consistency = Math.max(0.01, 1 - Math.min(coefficientOfVariation, 1)); // Prevent division by zero
+    const robustScore = median / consistency;
+
     results.results.push({
       function: name,
       totalTime: parseFloat(totalTime.toFixed(4)),
@@ -74,15 +90,18 @@ function runBenchmarkSuite(
       minTime: parseFloat(minTime.toFixed(4)),
       maxTime: parseFloat(maxTime.toFixed(4)),
       stdDev: parseFloat(stdDev.toFixed(4)),
+      median: parseFloat(median.toFixed(4)),
+      coefficientOfVariation: parseFloat(coefficientOfVariation.toFixed(4)),
+      robustScore: parseFloat(robustScore.toFixed(4)),
       rawTimes: times.map((t) => parseFloat(t.toFixed(4))),
     });
   });
 
-  // Calculate relative performance based on average total times
-  const fastest = Math.min(...results.results.map((r: any) => r.totalTime));
+  // Calculate relative performance based on median times
+  const fastest = Math.min(...results.results.map((r: any) => r.median));
   results.results.forEach((r: any) => {
-    r.relativePerformance = parseFloat((r.totalTime / fastest).toFixed(2));
-    r.isFastest = r.totalTime === fastest;
+    r.relativePerformance = parseFloat((r.median / fastest).toFixed(2));
+    r.isFastest = r.median === fastest;
   });
 
   benchmarkResults.tests.push(results);
@@ -90,7 +109,11 @@ function runBenchmarkSuite(
 
 // Function to save results to JSON file
 function saveBenchmarkResults(): void {
-  const outputPath = path.join(process.cwd(), "benchmark-results.json");
+  const outputPath = path.join(
+    process.cwd(),
+    "benchmarks",
+    "benchmark-results.json"
+  );
   const jsonOutput = JSON.stringify(benchmarkResults, null, 2);
 
   try {
