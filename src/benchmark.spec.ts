@@ -126,10 +126,9 @@ describe("Performance Benchmarks", () => {
     sizes.forEach(({ name, size, iterations }) => {
       it(`should benchmark ${name.toLowerCase()} arrays (${size.toLocaleString()} elements)`, () => {
         const testArray = generateNumbers(size);
-        let result1: number[] = [];
-        let result2: number[] = [];
-        let result3: number[] = [];
-        let result4: number[] = [];
+        let reduceResult: number[] = [];
+        let filterMapResult: number[] = [];
+        let mapFilterResult: number[] = [];
 
         const testName = `Array Size Scaling - ${name} (${size.toLocaleString()} elements)`;
         const testParams = {
@@ -139,30 +138,23 @@ describe("Performance Benchmarks", () => {
 
         const benchmarkFns = [
           {
-            name: "mapFilter",
-            fn: () => {
-              result1 = mapFilter(testArray, isEven, double);
-            },
-            iterations,
-          },
-          {
-            name: "mapFilterWithSparseCheck",
-            fn: () => {
-              result2 = mapFilter(testArray, isEven, double, true);
-            },
-            iterations,
-          },
-          {
             name: ".reduce()",
             fn: () => {
-              result3 = reduce(testArray, isEven, double);
+              reduceResult = reduce(testArray, isEven, double);
             },
             iterations,
           },
           {
             name: ".filter().map()",
             fn: () => {
-              result4 = testArray.filter(isEven).map(double);
+              filterMapResult = testArray.filter(isEven).map(double);
+            },
+            iterations,
+          },
+          {
+            name: "mapFilter",
+            fn: () => {
+              mapFilterResult = mapFilter(testArray, isEven, double);
             },
             iterations,
           },
@@ -170,9 +162,8 @@ describe("Performance Benchmarks", () => {
 
         runBenchmarkSuite(testName, testParams, benchmarkFns);
 
-        expect(result1).toEqual(result2);
-        expect(result1).toEqual(result3);
-        expect(result1).toEqual(result4);
+        expect(reduceResult).toEqual(filterMapResult);
+        expect(reduceResult).toEqual(mapFilterResult);
       });
     });
   });
@@ -204,10 +195,9 @@ describe("Performance Benchmarks", () => {
 
     selectivityTests.forEach(({ name, filter, expectedPassRate }) => {
       it(`should benchmark ${name.toLowerCase()}`, () => {
-        let result1: number[] = [];
-        let result2: number[] = [];
-        let result3: number[] = [];
-        let result4: number[] = [];
+        let reduceResult: number[] = [];
+        let filterMapResult: number[] = [];
+        let mapFilterResult: number[] = [];
 
         const testName = `Filter Selectivity - ${name}`;
         const testParams = {
@@ -218,30 +208,23 @@ describe("Performance Benchmarks", () => {
 
         const benchmarkFns = [
           {
-            name: "mapFilter",
-            fn: () => {
-              result1 = mapFilter(testArray, filter, double);
-            },
-            iterations,
-          },
-          {
-            name: "mapFilterWithSparseCheck",
-            fn: () => {
-              result2 = mapFilter(testArray, filter, double, true);
-            },
-            iterations,
-          },
-          {
             name: ".reduce()",
             fn: () => {
-              result3 = reduce(testArray, filter, double);
+              reduceResult = reduce(testArray, filter, double);
             },
             iterations,
           },
           {
             name: ".filter().map()",
             fn: () => {
-              result4 = testArray.filter(filter).map(double);
+              filterMapResult = testArray.filter(filter).map(double);
+            },
+            iterations,
+          },
+          {
+            name: "mapFilter",
+            fn: () => {
+              mapFilterResult = mapFilter(testArray, filter, double);
             },
             iterations,
           },
@@ -249,11 +232,10 @@ describe("Performance Benchmarks", () => {
 
         runBenchmarkSuite(testName, testParams, benchmarkFns);
 
-        expect(result1).toEqual(result2);
-        expect(result1).toEqual(result3);
-        expect(result1).toEqual(result4);
+        expect(reduceResult).toEqual(filterMapResult);
+        expect(reduceResult).toEqual(mapFilterResult);
 
-        const actualPassRate = result1.length / testSize;
+        const actualPassRate = mapFilterResult.length / testSize;
         expect(actualPassRate).toBeCloseTo(expectedPassRate, 2);
       });
     });
@@ -308,10 +290,9 @@ describe("Performance Benchmarks", () => {
           (x) => x !== undefined
         ).length;
 
-        let result1: number[] = [];
-        let result2: number[] = [];
-        let result3: number[] = [];
-        let result4: number[] = [];
+        let reduceResult: number[] = [];
+        let filterMapResult: number[] = [];
+        let mapFilterResult: number[] = [];
 
         const testName = `Sparse Arrays - ${name}`;
         const testParams = {
@@ -323,30 +304,23 @@ describe("Performance Benchmarks", () => {
 
         const benchmarkFns = [
           {
-            name: "mapFilter",
-            fn: () => {
-              result1 = mapFilter(sparseArray, isNumber, double);
-            },
-            iterations,
-          },
-          {
-            name: "mapFilterWithSparseCheck",
-            fn: () => {
-              result2 = mapFilter(sparseArray, isNumber, double, true);
-            },
-            iterations,
-          },
-          {
             name: ".reduce()",
             fn: () => {
-              result3 = reduce(sparseArray, isNumber, double);
+              reduceResult = reduce(sparseArray, isNumber, double);
             },
             iterations,
           },
           {
             name: ".filter().map()",
             fn: () => {
-              result4 = sparseArray.filter(isNumber).map(double);
+              filterMapResult = sparseArray.filter(isNumber).map(double);
+            },
+            iterations,
+          },
+          {
+            name: "mapFilter",
+            fn: () => {
+              mapFilterResult = mapFilter(sparseArray, isNumber, double);
             },
             iterations,
           },
@@ -354,19 +328,8 @@ describe("Performance Benchmarks", () => {
 
         runBenchmarkSuite(testName, testParams, benchmarkFns);
 
-        expect(result2).toEqual(result3);
-        expect(result2).toEqual(result4);
-
-        // Note: result1 might be different if mapFilter doesn't handle holes properly
-        if (result1.length !== result3.length) {
-          // Record difference in test params for JSON output
-          (testParams as any).holeHandlingDifference = {
-            mapFilterResults: result1.length,
-            mapFilterWithSparseCheckResults: result2.length,
-            reduceResults: result3.length,
-            nativeResults: result4.length,
-          };
-        }
+        expect(reduceResult).toEqual(filterMapResult);
+        expect(reduceResult).toEqual(mapFilterResult);
       });
     });
   });
@@ -383,10 +346,9 @@ describe("Performance Benchmarks", () => {
       const filter = (obj: any) => obj.id % 2 === 0;
       const mapper = (obj: any) => ({ ...obj, doubled: obj.value * 2 });
 
-      let result1: any[] = [];
-      let result2: any[] = [];
-      let result3: any[] = [];
-      let result4: any[] = [];
+      let reduceResult: any[] = [];
+      let filterMapResult: any[] = [];
+      let mapFilterResult: any[] = [];
 
       const testName = "Complex Objects - Simple Objects";
       const testParams = {
@@ -398,30 +360,23 @@ describe("Performance Benchmarks", () => {
 
       const benchmarkFns = [
         {
-          name: "mapFilter",
-          fn: () => {
-            result1 = mapFilter(testArray, filter, mapper);
-          },
-          iterations,
-        },
-        {
-          name: "mapFilterWithSparseCheck",
-          fn: () => {
-            result2 = mapFilter(testArray, filter, mapper, true);
-          },
-          iterations,
-        },
-        {
           name: ".reduce()",
           fn: () => {
-            result3 = reduce(testArray, filter, mapper);
+            reduceResult = reduce(testArray, filter, mapper);
           },
           iterations,
         },
         {
           name: ".filter().map()",
           fn: () => {
-            result4 = testArray.filter(filter).map(mapper);
+            filterMapResult = testArray.filter(filter).map(mapper);
+          },
+          iterations,
+        },
+        {
+          name: "mapFilter",
+          fn: () => {
+            mapFilterResult = mapFilter(testArray, filter, mapper);
           },
           iterations,
         },
@@ -430,9 +385,8 @@ describe("Performance Benchmarks", () => {
       runBenchmarkSuite(testName, testParams, benchmarkFns);
 
       // Verify results are identical
-      expect(result1).toEqual(result2);
-      expect(result1).toEqual(result3);
-      expect(result1).toEqual(result4);
+      expect(reduceResult).toEqual(filterMapResult);
+      expect(reduceResult).toEqual(mapFilterResult);
     });
 
     it("should benchmark complex user objects", () => {
@@ -476,10 +430,9 @@ describe("Performance Benchmarks", () => {
           user.active && user.metadata.preferences.notifications,
       });
 
-      let result1: any[] = [];
-      let result2: any[] = [];
-      let result3: any[] = [];
-      let result4: any[] = [];
+      let reduceResult: any[] = [];
+      let filterMapResult: any[] = [];
+      let mapFilterResult: any[] = [];
 
       const testName = "Complex Objects - Complex User Objects";
       const testParams = {
@@ -491,30 +444,23 @@ describe("Performance Benchmarks", () => {
 
       const benchmarkFns = [
         {
-          name: "mapFilter",
-          fn: () => {
-            result1 = mapFilter(testArray, filter, mapper);
-          },
-          iterations,
-        },
-        {
-          name: "mapFilterWithSparseCheck",
-          fn: () => {
-            result2 = mapFilter(testArray, filter, mapper, true);
-          },
-          iterations,
-        },
-        {
           name: ".reduce()",
           fn: () => {
-            result3 = reduce(testArray, filter, mapper);
+            reduceResult = reduce(testArray, filter, mapper);
           },
           iterations,
         },
         {
           name: ".filter().map()",
           fn: () => {
-            result4 = testArray.filter(filter).map(mapper);
+            filterMapResult = testArray.filter(filter).map(mapper);
+          },
+          iterations,
+        },
+        {
+          name: "mapFilter",
+          fn: () => {
+            mapFilterResult = mapFilter(testArray, filter, mapper);
           },
           iterations,
         },
@@ -522,9 +468,8 @@ describe("Performance Benchmarks", () => {
 
       runBenchmarkSuite(testName, testParams, benchmarkFns);
 
-      expect(result1).toEqual(result2);
-      expect(result1).toEqual(result3);
-      expect(result1).toEqual(result4);
+      expect(reduceResult).toEqual(filterMapResult);
+      expect(reduceResult).toEqual(mapFilterResult);
     });
 
     it("should benchmark deep nested objects", () => {
@@ -569,10 +514,9 @@ describe("Performance Benchmarks", () => {
         },
       });
 
-      let result1: any[] = [];
-      let result2: any[] = [];
-      let result3: any[] = [];
-      let result4: any[] = [];
+      let reduceResult: any[] = [];
+      let filterMapResult: any[] = [];
+      let mapFilterResult: any[] = [];
 
       const testName = "Complex Objects - Deep Nested Objects";
       const testParams = {
@@ -584,30 +528,23 @@ describe("Performance Benchmarks", () => {
 
       const benchmarkFns = [
         {
-          name: "mapFilter",
-          fn: () => {
-            result1 = mapFilter(testArray, filter, mapper);
-          },
-          iterations,
-        },
-        {
-          name: "mapFilterWithSparseCheck",
-          fn: () => {
-            result2 = mapFilter(testArray, filter, mapper, true);
-          },
-          iterations,
-        },
-        {
           name: ".reduce()",
           fn: () => {
-            result3 = reduce(testArray, filter, mapper);
+            reduceResult = reduce(testArray, filter, mapper);
           },
           iterations,
         },
         {
           name: ".filter().map()",
           fn: () => {
-            result4 = testArray.filter(filter).map(mapper);
+            filterMapResult = testArray.filter(filter).map(mapper);
+          },
+          iterations,
+        },
+        {
+          name: "mapFilter",
+          fn: () => {
+            mapFilterResult = mapFilter(testArray, filter, mapper);
           },
           iterations,
         },
@@ -615,9 +552,8 @@ describe("Performance Benchmarks", () => {
 
       runBenchmarkSuite(testName, testParams, benchmarkFns);
 
-      expect(result1).toEqual(result2);
-      expect(result1).toEqual(result3);
-      expect(result1).toEqual(result4);
+      expect(reduceResult).toEqual(filterMapResult);
+      expect(reduceResult).toEqual(mapFilterResult);
     });
   });
 
@@ -632,10 +568,9 @@ describe("Performance Benchmarks", () => {
       const singleParamFilter = (n: number) => n % 2 === 0;
       const singleParamMapper = (n: number) => n * 2;
 
-      let result1: number[] = [];
-      let result2: number[] = [];
-      let result3: number[] = [];
-      let result4: number[] = [];
+      let reduceResult: number[] = [];
+      let filterMapResult: number[] = [];
+      let mapFilterResult: number[] = [];
 
       const testName = "Function Call Overhead - Single Parameter Functions";
       const testParams = {
@@ -648,9 +583,9 @@ describe("Performance Benchmarks", () => {
 
       const benchmarkFns = [
         {
-          name: "mapFilter",
+          name: ".reduce()",
           fn: () => {
-            result1 = mapFilter(
+            reduceResult = reduce(
               testArray,
               singleParamFilter,
               singleParamMapper
@@ -659,30 +594,22 @@ describe("Performance Benchmarks", () => {
           iterations,
         },
         {
-          name: "mapFilterWithSparseCheck",
-          fn: () => {
-            result2 = mapFilter(
-              testArray,
-              singleParamFilter,
-              singleParamMapper,
-              true
-            );
-          },
-          iterations,
-        },
-        {
-          name: ".reduce()",
-          fn: () => {
-            result3 = reduce(testArray, singleParamFilter, singleParamMapper);
-          },
-          iterations,
-        },
-        {
           name: ".filter().map()",
           fn: () => {
-            result4 = testArray
+            filterMapResult = testArray
               .filter(singleParamFilter)
               .map(singleParamMapper);
+          },
+          iterations,
+        },
+        {
+          name: "mapFilter",
+          fn: () => {
+            mapFilterResult = mapFilter(
+              testArray,
+              singleParamFilter,
+              singleParamMapper
+            );
           },
           iterations,
         },
@@ -690,9 +617,8 @@ describe("Performance Benchmarks", () => {
 
       runBenchmarkSuite(testName, testParams, benchmarkFns);
 
-      expect(result1).toEqual(result2);
-      expect(result1).toEqual(result3);
-      expect(result1).toEqual(result4);
+      expect(reduceResult).toEqual(filterMapResult);
+      expect(reduceResult).toEqual(mapFilterResult);
     });
 
     it("should benchmark dual parameter function overhead", () => {
@@ -704,10 +630,9 @@ describe("Performance Benchmarks", () => {
       const dualParamMapper = (n: number, index?: number) =>
         n * 2 + (index || 0);
 
-      let result1: number[] = [];
-      let result2: number[] = [];
-      let result3: number[] = [];
-      let result4: number[] = [];
+      let reduceResult: number[] = [];
+      let filterMapResult: number[] = [];
+      let mapFilterResult: number[] = [];
 
       const testName = "Function Call Overhead - Dual Parameter Functions";
       const testParams = {
@@ -720,35 +645,29 @@ describe("Performance Benchmarks", () => {
 
       const benchmarkFns = [
         {
-          name: "mapFilter",
-          fn: () => {
-            result1 = mapFilter(testArray, dualParamFilter, dualParamMapper);
-          },
-          iterations,
-        },
-        {
-          name: "mapFilterWithSparseCheck",
-          fn: () => {
-            result2 = mapFilter(
-              testArray,
-              dualParamFilter,
-              dualParamMapper,
-              true
-            );
-          },
-          iterations,
-        },
-        {
           name: ".reduce()",
           fn: () => {
-            result3 = reduce(testArray, dualParamFilter, dualParamMapper);
+            reduceResult = reduce(testArray, dualParamFilter, dualParamMapper);
           },
           iterations,
         },
         {
           name: ".filter().map()",
           fn: () => {
-            result4 = testArray.filter(dualParamFilter).map(dualParamMapper);
+            filterMapResult = testArray
+              .filter(dualParamFilter)
+              .map(dualParamMapper);
+          },
+          iterations,
+        },
+        {
+          name: "mapFilter",
+          fn: () => {
+            mapFilterResult = mapFilter(
+              testArray,
+              dualParamFilter,
+              dualParamMapper
+            );
           },
           iterations,
         },
@@ -756,9 +675,8 @@ describe("Performance Benchmarks", () => {
 
       runBenchmarkSuite(testName, testParams, benchmarkFns);
 
-      expect(result1).toEqual(result2);
-      expect(result1).toEqual(result3);
-      expect(result1).toEqual(result4);
+      expect(reduceResult).toEqual(filterMapResult);
+      expect(reduceResult).toEqual(mapFilterResult);
     });
 
     it("should benchmark minimal function call overhead", () => {
@@ -768,10 +686,9 @@ describe("Performance Benchmarks", () => {
       const trivialFilter = (n: number) => true;
       const trivialMapper = (n: number) => n;
 
-      let result1: number[] = [];
-      let result2: number[] = [];
-      let result3: number[] = [];
-      let result4: number[] = [];
+      let reduceResult: number[] = [];
+      let filterMapResult: number[] = [];
+      let mapFilterResult: number[] = [];
 
       const testName = "Function Call Overhead - Minimal Overhead";
       const testParams = {
@@ -784,30 +701,29 @@ describe("Performance Benchmarks", () => {
 
       const benchmarkFns = [
         {
-          name: "mapFilter",
-          fn: () => {
-            result1 = mapFilter(testArray, trivialFilter, trivialMapper);
-          },
-          iterations,
-        },
-        {
-          name: "mapFilterWithSparseCheck",
-          fn: () => {
-            result2 = mapFilter(testArray, trivialFilter, trivialMapper, true);
-          },
-          iterations,
-        },
-        {
           name: ".reduce()",
           fn: () => {
-            result3 = reduce(testArray, trivialFilter, trivialMapper);
+            reduceResult = reduce(testArray, trivialFilter, trivialMapper);
           },
           iterations,
         },
         {
           name: ".filter().map()",
           fn: () => {
-            result4 = testArray.filter(trivialFilter).map(trivialMapper);
+            filterMapResult = testArray
+              .filter(trivialFilter)
+              .map(trivialMapper);
+          },
+          iterations,
+        },
+        {
+          name: "mapFilter",
+          fn: () => {
+            mapFilterResult = mapFilter(
+              testArray,
+              trivialFilter,
+              trivialMapper
+            );
           },
           iterations,
         },
@@ -815,9 +731,8 @@ describe("Performance Benchmarks", () => {
 
       runBenchmarkSuite(testName, testParams, benchmarkFns);
 
-      expect(result1).toEqual(result2);
-      expect(result1).toEqual(result3);
-      expect(result1).toEqual(result4);
+      expect(reduceResult).toEqual(filterMapResult);
+      expect(reduceResult).toEqual(mapFilterResult);
     });
 
     it("should benchmark function.length checking overhead", () => {
@@ -834,10 +749,9 @@ describe("Performance Benchmarks", () => {
         (n: number, _?: number) => n * 2,
       ];
 
-      let result1: number[] = [];
-      let result2: number[] = [];
-      let result3: number[] = [];
-      let result4: number[] = [];
+      let reduceResult: number[] = [];
+      let filterMapResult: number[] = [];
+      let mapFilterResult: number[] = [];
 
       const testName = "Function Call Overhead - Function.length Checking";
       const testParams = {
@@ -850,30 +764,11 @@ describe("Performance Benchmarks", () => {
 
       const benchmarkFns = [
         {
-          name: "mapFilter",
-          fn: () => {
-            // Alternate between different function lengths to stress the checking
-            const filterFn = filterWithDifferentLengths[0];
-            const mapperFn = mapperWithDifferentLengths[1];
-            result1 = mapFilter(testArray, filterFn, mapperFn);
-          },
-          iterations,
-        },
-        {
-          name: "mapFilterWithSparseCheck",
-          fn: () => {
-            const filterFn = filterWithDifferentLengths[0];
-            const mapperFn = mapperWithDifferentLengths[1];
-            result2 = mapFilter(testArray, filterFn, mapperFn, true);
-          },
-          iterations,
-        },
-        {
           name: ".reduce()",
           fn: () => {
             const filterFn = filterWithDifferentLengths[0];
             const mapperFn = mapperWithDifferentLengths[1];
-            result3 = reduce(testArray, filterFn, mapperFn);
+            reduceResult = reduce(testArray, filterFn, mapperFn);
           },
           iterations,
         },
@@ -882,7 +777,17 @@ describe("Performance Benchmarks", () => {
           fn: () => {
             const filterFn = filterWithDifferentLengths[0];
             const mapperFn = mapperWithDifferentLengths[1];
-            result4 = testArray.filter(filterFn).map(mapperFn);
+            filterMapResult = testArray.filter(filterFn).map(mapperFn);
+          },
+          iterations,
+        },
+        {
+          name: "mapFilter",
+          fn: () => {
+            // Alternate between different function lengths to stress the checking
+            const filterFn = filterWithDifferentLengths[0];
+            const mapperFn = mapperWithDifferentLengths[1];
+            mapFilterResult = mapFilter(testArray, filterFn, mapperFn);
           },
           iterations,
         },
@@ -890,9 +795,8 @@ describe("Performance Benchmarks", () => {
 
       runBenchmarkSuite(testName, testParams, benchmarkFns);
 
-      expect(result1).toEqual(result2);
-      expect(result1).toEqual(result3);
-      expect(result1).toEqual(result4);
+      expect(reduceResult).toEqual(filterMapResult);
+      expect(reduceResult).toEqual(mapFilterResult);
     });
   });
 });

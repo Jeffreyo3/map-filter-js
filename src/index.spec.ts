@@ -102,8 +102,7 @@ describe("mapFilter", () => {
       const result = mapFilter(
         sparseArray,
         () => true,
-        (x) => x,
-        true
+        (x) => x
       );
       expect(result).toEqual([]);
     });
@@ -114,8 +113,7 @@ describe("mapFilter", () => {
       const result = mapFilter(
         sparseArray,
         () => true,
-        (x, index) => `${x}-${index}`,
-        true
+        (x, index) => `${x}-${index}`
       );
 
       expect(result).toEqual(["1-0", "3-2", "5-4"]);
@@ -127,8 +125,7 @@ describe("mapFilter", () => {
       const result = mapFilter(
         sparseArray,
         () => true,
-        (x) => x,
-        true
+        (x) => x
       );
       expect(result).toEqual([3, 4, 5]);
     });
@@ -199,7 +196,7 @@ describe("mapFilter", () => {
       const filterCallCount = jest.fn().mockReturnValue(true);
       const array = [1, , 3, , 5];
 
-      mapFilter(array, filterCallCount, (x) => x, true);
+      mapFilter(array, filterCallCount, (x) => x);
 
       expect(filterCallCount).toHaveBeenCalledTimes(3);
       expect(filterCallCount).toHaveBeenCalledWith(1, 0);
