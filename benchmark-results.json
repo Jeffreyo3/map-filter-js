@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-14T23:46:56.435Z",
+  "timestamp": "2025-11-15T01:25:09.228Z",
   "tests": [
     {
       "testName": "Array Size Scaling - Small (100 elements)",
@@ -10,54 +10,70 @@
       "results": [
         {
           "function": "mapFilter",
-          "totalTime": 1.8926,
-          "avgTime": 0.0019,
+          "totalTime": 2.9016,
+          "avgTime": 0.0029,
           "iterations": 1000,
           "runs": 10,
-          "minTime": 1.2573,
-          "maxTime": 5.4903,
-          "stdDev": 1.2933,
+          "minTime": 1.9736,
+          "maxTime": 8.4864,
+          "stdDev": 1.9817,
           "rawTimes": [
-            5.4903, 1.4636, 1.3993, 2.9236, 1.2987, 1.2578, 1.3163, 1.2573,
-            1.2589, 1.2601
+            8.4864, 2.1702, 2.024, 2.027, 2.0418, 1.9934, 2.0139, 1.9854,
+            4.3008, 1.9736
           ],
-          "relativePerformance": 2.71,
+          "relativePerformance": 3.51,
           "isFastest": false
         },
         {
-          "function": "native .reduce()",
-          "totalTime": 0.6988,
-          "avgTime": 0.0007,
+          "function": "mapFilterWithSparseCheck",
+          "totalTime": 2.8834,
+          "avgTime": 0.0029,
           "iterations": 1000,
           "runs": 10,
-          "minTime": 0.2532,
-          "maxTime": 1.8912,
-          "stdDev": 0.5719,
+          "minTime": 2.231,
+          "maxTime": 8.1982,
+          "stdDev": 1.7724,
           "rawTimes": [
-            1.8912, 1.2642, 1.0459, 0.2532, 0.2736, 0.2603, 1.2136, 0.2627,
-            0.2617, 0.2616
+            8.1982, 2.3467, 2.247, 2.2405, 2.2439, 2.231, 2.335, 2.257, 2.3576,
+            2.3774
+          ],
+          "relativePerformance": 3.48,
+          "isFastest": false
+        },
+        {
+          "function": ".reduce()",
+          "totalTime": 0.9203,
+          "avgTime": 0.0009,
+          "iterations": 1000,
+          "runs": 10,
+          "minTime": 0.289,
+          "maxTime": 2.6759,
+          "stdDev": 0.9869,
+          "rawTimes": [
+            2.6613, 2.6759, 1.8384, 0.2901, 0.2899, 0.289, 0.29, 0.2898, 0.289,
+            0.29
+          ],
+          "relativePerformance": 1.11,
+          "isFastest": false
+        },
+        {
+          "function": ".filter().map()",
+          "totalTime": 0.8278,
+          "avgTime": 0.0008,
+          "iterations": 1000,
+          "runs": 10,
+          "minTime": 0.3866,
+          "maxTime": 2.1039,
+          "stdDev": 0.6635,
+          "rawTimes": [
+            2.098, 2.1039, 0.9798, 0.7305, 0.3871, 0.3874, 0.3866, 0.4121,
+            0.4002, 0.3921
           ],
           "relativePerformance": 1,
           "isFastest": true
-        },
-        {
-          "function": "native filter().map()",
-          "totalTime": 0.7324,
-          "avgTime": 0.0007,
-          "iterations": 1000,
-          "runs": 10,
-          "minTime": 0.3439,
-          "maxTime": 1.8811,
-          "stdDev": 0.5898,
-          "rawTimes": [
-            1.8811, 1.8615, 0.7752, 0.3521, 0.3505, 0.3508, 0.3511, 0.7115,
-            0.346, 0.3439
-          ],
-          "relativePerformance": 1.05,
-          "isFastest": false
         }
       ],
-      "timestamp": "2025-11-14T23:46:56.473Z"
+      "timestamp": "2025-11-15T01:25:09.282Z"
     },
     {
       "testName": "Array Size Scaling - Medium (10,000 elements)",
@@ -68,54 +84,70 @@
       "results": [
         {
           "function": "mapFilter",
-          "totalTime": 11.8124,
-          "avgTime": 0.1181,
+          "totalTime": 15.603,
+          "avgTime": 0.156,
           "iterations": 100,
           "runs": 10,
-          "minTime": 11.566,
-          "maxTime": 12.5307,
-          "stdDev": 0.3108,
+          "minTime": 14.2412,
+          "maxTime": 16.9278,
+          "stdDev": 0.9653,
           "rawTimes": [
-            11.7693, 11.6699, 11.7568, 11.6339, 11.5991, 11.6585, 12.5307,
-            11.6435, 11.566, 12.2964
+            16.9278, 16.3749, 16.47, 16.2335, 16.4842, 15.5365, 14.8222,
+            14.2412, 14.5201, 14.4195
           ],
-          "relativePerformance": 3.31,
+          "relativePerformance": 4.41,
           "isFastest": false
         },
         {
-          "function": "native .reduce()",
-          "totalTime": 3.5734,
-          "avgTime": 0.0357,
+          "function": "mapFilterWithSparseCheck",
+          "totalTime": 16.0488,
+          "avgTime": 0.1605,
           "iterations": 100,
           "runs": 10,
-          "minTime": 3.5166,
-          "maxTime": 3.7341,
-          "stdDev": 0.0646,
+          "minTime": 15.7614,
+          "maxTime": 16.2864,
+          "stdDev": 0.141,
           "rawTimes": [
-            3.6323, 3.584, 3.5433, 3.5563, 3.5275, 3.7341, 3.5191, 3.5962,
-            3.5166, 3.5248
+            15.9352, 15.7614, 16.0615, 16.0849, 15.9302, 16.1022, 16.0124,
+            16.2864, 16.1135, 16.2001
+          ],
+          "relativePerformance": 4.53,
+          "isFastest": false
+        },
+        {
+          "function": ".reduce()",
+          "totalTime": 3.5405,
+          "avgTime": 0.0354,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 3.5068,
+          "maxTime": 3.5938,
+          "stdDev": 0.0311,
+          "rawTimes": [
+            3.582, 3.5826, 3.5364, 3.5938, 3.5244, 3.5134, 3.5253, 3.5276,
+            3.5124, 3.5068
           ],
           "relativePerformance": 1,
           "isFastest": true
         },
         {
-          "function": "native filter().map()",
-          "totalTime": 17.8833,
-          "avgTime": 0.1788,
+          "function": ".filter().map()",
+          "totalTime": 17.8912,
+          "avgTime": 0.1789,
           "iterations": 100,
           "runs": 10,
-          "minTime": 14.9721,
-          "maxTime": 18.5746,
-          "stdDev": 0.9826,
+          "minTime": 14.9709,
+          "maxTime": 18.9221,
+          "stdDev": 1.1548,
           "rawTimes": [
-            18.0902, 18.1188, 17.9705, 18.295, 18.2806, 18.2558, 18.164,
-            18.5746, 18.1117, 14.9721
+            18.612, 18.1551, 18.3929, 18.6482, 18.2999, 18.1738, 18.245,
+            18.9221, 16.4918, 14.9709
           ],
-          "relativePerformance": 5,
+          "relativePerformance": 5.05,
           "isFastest": false
         }
       ],
-      "timestamp": "2025-11-14T23:46:56.510Z"
+      "timestamp": "2025-11-15T01:25:09.362Z"
     },
     {
       "testName": "Array Size Scaling - Large (1,000,000 elements)",
@@ -126,54 +158,70 @@
       "results": [
         {
           "function": "mapFilter",
-          "totalTime": 138.0117,
-          "avgTime": 13.8012,
+          "totalTime": 162.1696,
+          "avgTime": 16.217,
           "iterations": 10,
           "runs": 10,
-          "minTime": 127.7687,
-          "maxTime": 160.7715,
-          "stdDev": 9.8033,
+          "minTime": 152.6916,
+          "maxTime": 167.01,
+          "stdDev": 3.9759,
           "rawTimes": [
-            131.7948, 134.2621, 160.7715, 147.8302, 127.7687, 130.3935,
-            131.9698, 134.7056, 134.2705, 146.3505
+            164.7353, 161.6109, 163.7608, 167.01, 161.556, 162.1188, 158.673,
+            162.6182, 166.9214, 152.6916
           ],
-          "relativePerformance": 2.52,
+          "relativePerformance": 2.74,
           "isFastest": false
         },
         {
-          "function": "native .reduce()",
-          "totalTime": 54.8118,
-          "avgTime": 5.4812,
+          "function": "mapFilterWithSparseCheck",
+          "totalTime": 175.9749,
+          "avgTime": 17.5975,
           "iterations": 10,
           "runs": 10,
-          "minTime": 50.0862,
-          "maxTime": 78.5336,
-          "stdDev": 8.3298,
+          "minTime": 169.6036,
+          "maxTime": 193.3202,
+          "stdDev": 6.9418,
           "rawTimes": [
-            51.842, 50.0862, 50.6181, 50.9041, 59.4434, 78.5336, 53.8271, 51.02,
-            50.743, 51.1008
+            170.191, 172.2965, 174.375, 180.8445, 180.3345, 169.6036, 170.6607,
+            171.5505, 176.5722, 193.3202
+          ],
+          "relativePerformance": 2.98,
+          "isFastest": false
+        },
+        {
+          "function": ".reduce()",
+          "totalTime": 59.1024,
+          "avgTime": 5.9102,
+          "iterations": 10,
+          "runs": 10,
+          "minTime": 50.8402,
+          "maxTime": 87.4945,
+          "stdDev": 11.1141,
+          "rawTimes": [
+            51.785, 50.8402, 51.5708, 51.9762, 69.9355, 87.4945, 53.0122,
+            54.4489, 63.3088, 56.6523
           ],
           "relativePerformance": 1,
           "isFastest": true
         },
         {
-          "function": "native filter().map()",
-          "totalTime": 204.3383,
-          "avgTime": 20.4338,
+          "function": ".filter().map()",
+          "totalTime": 204.5954,
+          "avgTime": 20.4595,
           "iterations": 10,
           "runs": 10,
-          "minTime": 194.7206,
-          "maxTime": 226.3958,
-          "stdDev": 11.5626,
+          "minTime": 196.0928,
+          "maxTime": 224.2226,
+          "stdDev": 9.6005,
           "rawTimes": [
-            197.3703, 198.7188, 197.0763, 215.3357, 194.7206, 196.1699, 194.967,
-            222.5445, 226.3958, 200.0845
+            199.0924, 198.9845, 219.949, 196.0928, 197.5249, 200.1699, 211.0648,
+            200.379, 198.4739, 224.2226
           ],
-          "relativePerformance": 3.73,
+          "relativePerformance": 3.46,
           "isFastest": false
         }
       ],
-      "timestamp": "2025-11-14T23:46:56.919Z"
+      "timestamp": "2025-11-15T01:25:09.979Z"
     },
     {
       "testName": "Filter Selectivity - High Selectivity (10% pass)",
@@ -185,54 +233,70 @@
       "results": [
         {
           "function": "mapFilter",
-          "totalTime": 19.7228,
-          "avgTime": 0.1972,
+          "totalTime": 19.6766,
+          "avgTime": 0.1968,
           "iterations": 100,
           "runs": 10,
-          "minTime": 18.2311,
-          "maxTime": 22.8532,
-          "stdDev": 1.2479,
+          "minTime": 19.0625,
+          "maxTime": 22.9033,
+          "stdDev": 1.0936,
           "rawTimes": [
-            22.8532, 19.6007, 20.73, 19.0102, 19.456, 18.9138, 18.2311, 19.0639,
-            20.3353, 19.0336
+            22.9033, 19.3756, 19.2836, 19.2284, 19.6632, 19.6767, 19.087,
+            19.0625, 19.2381, 19.2473
           ],
-          "relativePerformance": 1.43,
+          "relativePerformance": 1.45,
           "isFastest": false
         },
         {
-          "function": "native .reduce()",
-          "totalTime": 19.6648,
-          "avgTime": 0.1966,
+          "function": "mapFilterWithSparseCheck",
+          "totalTime": 22.6796,
+          "avgTime": 0.2268,
           "iterations": 100,
           "runs": 10,
-          "minTime": 18.5218,
-          "maxTime": 20.2315,
-          "stdDev": 0.4405,
+          "minTime": 20.4952,
+          "maxTime": 29.6614,
+          "stdDev": 2.8651,
           "rawTimes": [
-            20.1989, 18.5218, 19.7278, 19.5894, 20.2315, 19.6074, 19.6196,
-            19.7083, 19.6773, 19.7662
+            20.8118, 21.2659, 20.4952, 20.6353, 20.7709, 20.5252, 25.577,
+            22.8973, 29.6614, 24.1557
           ],
-          "relativePerformance": 1.42,
+          "relativePerformance": 1.67,
           "isFastest": false
         },
         {
-          "function": "native filter().map()",
-          "totalTime": 13.8402,
-          "avgTime": 0.1384,
+          "function": ".reduce()",
+          "totalTime": 20.2425,
+          "avgTime": 0.2024,
           "iterations": 100,
           "runs": 10,
-          "minTime": 13.12,
-          "maxTime": 14.541,
-          "stdDev": 0.4466,
+          "minTime": 18.3619,
+          "maxTime": 21.8195,
+          "stdDev": 1.2036,
           "rawTimes": [
-            14.541, 14.1377, 14.0377, 14.133, 14.3454, 13.7149, 13.5055,
-            13.2632, 13.12, 13.604
+            21.8195, 21.1568, 21.4799, 20.9003, 20.8575, 20.8257, 19.487,
+            18.654, 18.882, 18.3619
+          ],
+          "relativePerformance": 1.49,
+          "isFastest": false
+        },
+        {
+          "function": ".filter().map()",
+          "totalTime": 13.6003,
+          "avgTime": 0.136,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 13.4053,
+          "maxTime": 14.0355,
+          "stdDev": 0.2141,
+          "rawTimes": [
+            13.4053, 13.4104, 13.4257, 13.9586, 13.5478, 13.5585, 13.4256,
+            14.0355, 13.6056, 13.6298
           ],
           "relativePerformance": 1,
           "isFastest": true
         }
       ],
-      "timestamp": "2025-11-14T23:47:03.027Z"
+      "timestamp": "2025-11-15T01:25:19.096Z"
     },
     {
       "testName": "Filter Selectivity - Medium Selectivity (50% pass)",
@@ -244,54 +308,70 @@
       "results": [
         {
           "function": "mapFilter",
-          "totalTime": 21.2696,
-          "avgTime": 0.2127,
+          "totalTime": 22.6383,
+          "avgTime": 0.2264,
           "iterations": 100,
           "runs": 10,
-          "minTime": 20.7902,
-          "maxTime": 21.9885,
-          "stdDev": 0.3179,
+          "minTime": 22.359,
+          "maxTime": 23.2042,
+          "stdDev": 0.2564,
           "rawTimes": [
-            21.9885, 21.4077, 21.3563, 21.4872, 21.0519, 20.7902, 20.9954,
-            21.2092, 21.0387, 21.3709
+            23.2042, 22.4429, 22.5476, 22.5957, 23.019, 22.5685, 22.4064,
+            22.5627, 22.6775, 22.359
           ],
-          "relativePerformance": 1.3,
+          "relativePerformance": 1.42,
           "isFastest": false
         },
         {
-          "function": "native .reduce()",
-          "totalTime": 19.7696,
-          "avgTime": 0.1977,
+          "function": "mapFilterWithSparseCheck",
+          "totalTime": 23.744,
+          "avgTime": 0.2374,
           "iterations": 100,
           "runs": 10,
-          "minTime": 14.4658,
-          "maxTime": 22.8547,
-          "stdDev": 3.7235,
+          "minTime": 23.6694,
+          "maxTime": 23.8952,
+          "stdDev": 0.0766,
           "rawTimes": [
-            22.767, 22.7068, 22.7393, 22.6947, 22.7679, 22.8547, 17.1964,
-            14.8951, 14.6084, 14.4658
+            23.7241, 23.7325, 23.7052, 23.8892, 23.6694, 23.7245, 23.6947,
+            23.6813, 23.8952, 23.7243
           ],
-          "relativePerformance": 1.21,
+          "relativePerformance": 1.49,
           "isFastest": false
         },
         {
-          "function": "native filter().map()",
-          "totalTime": 16.3493,
-          "avgTime": 0.1635,
+          "function": ".reduce()",
+          "totalTime": 19.5038,
+          "avgTime": 0.195,
           "iterations": 100,
           "runs": 10,
-          "minTime": 15.2793,
-          "maxTime": 18.7767,
-          "stdDev": 1.4708,
+          "minTime": 14.207,
+          "maxTime": 22.6105,
+          "stdDev": 3.7711,
           "rawTimes": [
-            18.4815, 18.7767, 18.4889, 15.7287, 15.3004, 15.2806, 15.2908,
-            15.5798, 15.2865, 15.2793
+            22.5447, 22.583, 22.6105, 22.4939, 22.4404, 22.502, 16.8701,
+            14.5601, 14.207, 14.2267
+          ],
+          "relativePerformance": 1.23,
+          "isFastest": false
+        },
+        {
+          "function": ".filter().map()",
+          "totalTime": 15.915,
+          "avgTime": 0.1592,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 14.8535,
+          "maxTime": 18.2782,
+          "stdDev": 1.4059,
+          "rawTimes": [
+            18.2782, 17.9311, 17.9374, 14.9992, 15.2435, 14.9307, 14.8535,
+            14.8915, 15.2318, 14.8536
           ],
           "relativePerformance": 1,
           "isFastest": true
         }
       ],
-      "timestamp": "2025-11-14T23:47:03.564Z"
+      "timestamp": "2025-11-15T01:25:19.866Z"
     },
     {
       "testName": "Filter Selectivity - Low Selectivity (90% pass)",
@@ -303,54 +383,70 @@
       "results": [
         {
           "function": "mapFilter",
-          "totalTime": 29.7265,
-          "avgTime": 0.2973,
+          "totalTime": 29.0685,
+          "avgTime": 0.2907,
           "iterations": 100,
           "runs": 10,
-          "minTime": 27.0984,
-          "maxTime": 35.4316,
-          "stdDev": 2.9695,
+          "minTime": 28.6585,
+          "maxTime": 29.8188,
+          "stdDev": 0.3126,
           "rawTimes": [
-            28.3529, 27.0984, 27.492, 31.422, 35.4316, 35.0223, 27.9194, 27.64,
-            28.3688, 28.518
+            29.8188, 28.7516, 29.1926, 29.0225, 29.2145, 29.0653, 28.6585,
+            28.9462, 28.8024, 29.213
           ],
-          "relativePerformance": 1.44,
+          "relativePerformance": 1.43,
           "isFastest": false
         },
         {
-          "function": "native .reduce()",
-          "totalTime": 20.6975,
-          "avgTime": 0.207,
+          "function": "mapFilterWithSparseCheck",
+          "totalTime": 30.1382,
+          "avgTime": 0.3014,
           "iterations": 100,
           "runs": 10,
-          "minTime": 20.1938,
-          "maxTime": 20.996,
-          "stdDev": 0.2556,
+          "minTime": 29.7161,
+          "maxTime": 30.8621,
+          "stdDev": 0.3169,
           "rawTimes": [
-            20.6768, 20.2646, 20.9693, 20.794, 20.7072, 20.7887, 20.1938,
-            20.874, 20.7107, 20.996
+            30.567, 30.1775, 30.8621, 30.0243, 30.0312, 29.7161, 29.9966,
+            29.9419, 29.9575, 30.1074
+          ],
+          "relativePerformance": 1.49,
+          "isFastest": false
+        },
+        {
+          "function": ".reduce()",
+          "totalTime": 20.2702,
+          "avgTime": 0.2027,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 19.7414,
+          "maxTime": 20.9585,
+          "stdDev": 0.4051,
+          "rawTimes": [
+            19.819, 20.2036, 19.7414, 20.0842, 20.494, 20.2044, 20.9585,
+            20.3914, 20.9227, 19.8822
           ],
           "relativePerformance": 1,
           "isFastest": true
         },
         {
-          "function": "native filter().map()",
-          "totalTime": 20.7133,
-          "avgTime": 0.2071,
+          "function": ".filter().map()",
+          "totalTime": 20.667,
+          "avgTime": 0.2067,
           "iterations": 100,
           "runs": 10,
-          "minTime": 20.5761,
-          "maxTime": 21.0408,
-          "stdDev": 0.1208,
+          "minTime": 19.8463,
+          "maxTime": 25.9576,
+          "stdDev": 1.7817,
           "rawTimes": [
-            20.6964, 20.7829, 20.6638, 20.5761, 20.7259, 20.6675, 20.6402,
-            21.0408, 20.6908, 20.6485
+            20.7656, 25.9576, 20.2839, 20.0104, 19.9409, 19.9947, 19.97,
+            19.9504, 19.95, 19.8463
           ],
-          "relativePerformance": 1,
+          "relativePerformance": 1.02,
           "isFastest": false
         }
       ],
-      "timestamp": "2025-11-14T23:47:04.158Z"
+      "timestamp": "2025-11-15T01:25:20.712Z"
     },
     {
       "testName": "Sparse Arrays - Low Sparsity (10% holes)",
@@ -363,54 +459,70 @@
       "results": [
         {
           "function": "mapFilter",
-          "totalTime": 195.0956,
-          "avgTime": 1.951,
+          "totalTime": 199.4246,
+          "avgTime": 1.9942,
           "iterations": 100,
           "runs": 10,
-          "minTime": 194.2869,
-          "maxTime": 198.3655,
-          "stdDev": 1.1429,
+          "minTime": 195.7854,
+          "maxTime": 216.3075,
+          "stdDev": 5.7721,
           "rawTimes": [
-            198.3655, 194.3034, 194.9914, 195.0589, 194.53, 194.2869, 194.7777,
-            195.4473, 194.7303, 194.4648
+            199.0513, 198.9228, 200.0201, 197.0775, 196.8327, 196.344, 196.6263,
+            195.7854, 197.2787, 216.3075
+          ],
+          "relativePerformance": 1.04,
+          "isFastest": false
+        },
+        {
+          "function": "mapFilterWithSparseCheck",
+          "totalTime": 196.8052,
+          "avgTime": 1.9681,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 194.9605,
+          "maxTime": 200.833,
+          "stdDev": 1.6994,
+          "rawTimes": [
+            200.833, 195.6592, 194.9605, 196.568, 197.414, 196.9247, 195.3593,
+            195.0539, 196.9512, 198.3282
           ],
           "relativePerformance": 1.02,
           "isFastest": false
         },
         {
-          "function": "native .reduce()",
-          "totalTime": 191.6768,
-          "avgTime": 1.9168,
+          "function": ".reduce()",
+          "totalTime": 192.4766,
+          "avgTime": 1.9248,
           "iterations": 100,
           "runs": 10,
-          "minTime": 185.7219,
-          "maxTime": 198.3813,
-          "stdDev": 4.3137,
+          "minTime": 187.9786,
+          "maxTime": 197.4986,
+          "stdDev": 3.8976,
           "rawTimes": [
-            194.5336, 194.9539, 194.9646, 195.0408, 192.0387, 186.9762,
-            187.3303, 186.8263, 185.7219, 198.3813
+            196.8869, 197.4986, 195.917, 195.9507, 195.3815, 189.1662, 188.8487,
+            188.5773, 188.5602, 187.9786
           ],
           "relativePerformance": 1,
           "isFastest": true
         },
         {
-          "function": "native filter().map()",
-          "totalTime": 194.8753,
-          "avgTime": 1.9488,
+          "function": ".filter().map()",
+          "totalTime": 205.0294,
+          "avgTime": 2.0503,
           "iterations": 100,
           "runs": 10,
-          "minTime": 192.2575,
-          "maxTime": 199.7925,
-          "stdDev": 2.6972,
+          "minTime": 194.2015,
+          "maxTime": 283.1741,
+          "stdDev": 26.085,
           "rawTimes": [
-            194.3222, 192.8817, 193.698, 193.5088, 192.8146, 192.8087, 199.2656,
-            192.2575, 197.4038, 199.7925
+            198.9828, 195.9529, 196.701, 194.2015, 283.1741, 198.3622, 194.7405,
+            196.5917, 195.6631, 195.9241
           ],
-          "relativePerformance": 1.02,
+          "relativePerformance": 1.07,
           "isFastest": false
         }
       ],
-      "timestamp": "2025-11-14T23:47:04.912Z"
+      "timestamp": "2025-11-15T01:25:21.772Z"
     },
     {
       "testName": "Sparse Arrays - Medium Sparsity (50% holes)",
@@ -423,54 +535,70 @@
       "results": [
         {
           "function": "mapFilter",
-          "totalTime": 133.5753,
-          "avgTime": 1.3358,
+          "totalTime": 125.6532,
+          "avgTime": 1.2565,
           "iterations": 100,
           "runs": 10,
-          "minTime": 118.0243,
-          "maxTime": 241.6449,
-          "stdDev": 36.3771,
+          "minTime": 124.717,
+          "maxTime": 126.4945,
+          "stdDev": 0.559,
           "rawTimes": [
-            121.715, 118.082, 118.9861, 119.0013, 119.227, 135.68, 124.3043,
-            241.6449, 119.0883, 118.0243
+            126.0631, 125.6472, 126.4945, 126.333, 125.8957, 124.717, 124.9865,
+            125.4343, 125.8676, 125.0934
           ],
-          "relativePerformance": 1.18,
+          "relativePerformance": 1.1,
           "isFastest": false
         },
         {
-          "function": "native .reduce()",
-          "totalTime": 113.356,
-          "avgTime": 1.1336,
+          "function": "mapFilterWithSparseCheck",
+          "totalTime": 121.6384,
+          "avgTime": 1.2164,
           "iterations": 100,
           "runs": 10,
-          "minTime": 112.66,
-          "maxTime": 115.6394,
-          "stdDev": 0.8559,
+          "minTime": 119.6683,
+          "maxTime": 127.7596,
+          "stdDev": 2.4979,
           "rawTimes": [
-            112.7475, 112.66, 112.7945, 112.8174, 113.1504, 112.8757, 115.6394,
-            113.4693, 113.9526, 113.4533
+            120.5082, 121.2539, 120.9468, 127.7596, 120.5042, 120.0682,
+            120.9604, 124.9932, 119.7215, 119.6683
+          ],
+          "relativePerformance": 1.07,
+          "isFastest": false
+        },
+        {
+          "function": ".reduce()",
+          "totalTime": 114.055,
+          "avgTime": 1.1406,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 112.771,
+          "maxTime": 114.8144,
+          "stdDev": 0.6628,
+          "rawTimes": [
+            114.8144, 114.3822, 113.7174, 114.1747, 114.1815, 114.5268,
+            112.9856, 112.771, 114.2185, 114.7784
           ],
           "relativePerformance": 1,
           "isFastest": true
         },
         {
-          "function": "native filter().map()",
-          "totalTime": 113.6258,
-          "avgTime": 1.1363,
+          "function": ".filter().map()",
+          "totalTime": 117.5985,
+          "avgTime": 1.176,
           "iterations": 100,
           "runs": 10,
-          "minTime": 111.4768,
-          "maxTime": 116.9354,
-          "stdDev": 1.9403,
+          "minTime": 115.7287,
+          "maxTime": 119.088,
+          "stdDev": 0.8364,
           "rawTimes": [
-            116.9354, 116.2037, 115.7559, 114.6487, 112.5933, 112.519, 111.9338,
-            112.1662, 112.0253, 111.4768
+            118.101, 117.7683, 117.6479, 118.009, 117.391, 119.088, 116.928,
+            118.0667, 117.2562, 115.7287
           ],
-          "relativePerformance": 1,
+          "relativePerformance": 1.03,
           "isFastest": false
         }
       ],
-      "timestamp": "2025-11-14T23:47:10.761Z"
+      "timestamp": "2025-11-15T01:25:29.749Z"
     },
     {
       "testName": "Sparse Arrays - High Sparsity (90% holes)",
@@ -483,54 +611,70 @@
       "results": [
         {
           "function": "mapFilter",
-          "totalTime": 29.7144,
-          "avgTime": 0.2971,
+          "totalTime": 38.9461,
+          "avgTime": 0.3895,
           "iterations": 100,
           "runs": 10,
-          "minTime": 27.811,
-          "maxTime": 37.4134,
-          "stdDev": 2.9597,
+          "minTime": 37.81,
+          "maxTime": 39.9969,
+          "stdDev": 0.688,
           "rawTimes": [
-            27.811, 27.8337, 28.4188, 28.2796, 28.1512, 27.9976, 28.732,
-            29.4738, 33.033, 37.4134
+            37.81, 38.1048, 39.8737, 38.3736, 39.1456, 38.5182, 39.2331,
+            39.9969, 39.2588, 39.1468
           ],
-          "relativePerformance": 1.13,
+          "relativePerformance": 1.51,
           "isFastest": false
         },
         {
-          "function": "native .reduce()",
-          "totalTime": 26.3667,
-          "avgTime": 0.2637,
+          "function": "mapFilterWithSparseCheck",
+          "totalTime": 31.7959,
+          "avgTime": 0.318,
           "iterations": 100,
           "runs": 10,
-          "minTime": 25.5684,
-          "maxTime": 27.4042,
-          "stdDev": 0.5902,
+          "minTime": 31.1124,
+          "maxTime": 32.2227,
+          "stdDev": 0.3247,
           "rawTimes": [
-            25.8567, 26.2293, 26.5882, 27.4042, 25.7426, 27.1056, 26.2353,
-            25.5684, 25.9843, 26.9521
+            31.2666, 31.1124, 31.8871, 32.2227, 31.9221, 31.8381, 31.8499,
+            31.8337, 32.0125, 32.0137
+          ],
+          "relativePerformance": 1.24,
+          "isFastest": false
+        },
+        {
+          "function": ".reduce()",
+          "totalTime": 26.2021,
+          "avgTime": 0.262,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 25.0773,
+          "maxTime": 27.1628,
+          "stdDev": 0.7292,
+          "rawTimes": [
+            26.8484, 27.1628, 26.3178, 26.802, 26.5545, 26.8882, 25.6785,
+            25.0773, 25.3079, 25.3838
+          ],
+          "relativePerformance": 1.02,
+          "isFastest": false
+        },
+        {
+          "function": ".filter().map()",
+          "totalTime": 25.7165,
+          "avgTime": 0.2572,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 25.1526,
+          "maxTime": 26.2711,
+          "stdDev": 0.3847,
+          "rawTimes": [
+            25.8531, 25.1526, 25.2875, 25.3825, 26.2007, 26.0562, 25.9983,
+            25.5004, 25.4626, 26.2711
           ],
           "relativePerformance": 1,
           "isFastest": true
-        },
-        {
-          "function": "native filter().map()",
-          "totalTime": 27.0762,
-          "avgTime": 0.2708,
-          "iterations": 100,
-          "runs": 10,
-          "minTime": 26.5687,
-          "maxTime": 27.5658,
-          "stdDev": 0.3046,
-          "rawTimes": [
-            27.0338, 26.866, 26.773, 26.924, 27.4619, 27.131, 27.0221, 27.4155,
-            27.5658, 26.5687
-          ],
-          "relativePerformance": 1.03,
-          "isFastest": false
         }
       ],
-      "timestamp": "2025-11-14T23:47:14.382Z"
+      "timestamp": "2025-11-15T01:25:34.563Z"
     },
     {
       "testName": "Complex Objects - Simple Objects",
@@ -543,54 +687,70 @@
       "results": [
         {
           "function": "mapFilter",
-          "totalTime": 244.3728,
-          "avgTime": 2.4437,
+          "totalTime": 254.6278,
+          "avgTime": 2.5463,
           "iterations": 100,
           "runs": 10,
-          "minTime": 242.6275,
-          "maxTime": 248.7845,
-          "stdDev": 2.2136,
+          "minTime": 238.2178,
+          "maxTime": 324.5587,
+          "stdDev": 28.3532,
           "rawTimes": [
-            248.7845, 242.6275, 242.9521, 243.2352, 244.0318, 243.5477,
-            242.9679, 248.6946, 243.4755, 243.4114
+            249.6719, 242.1758, 239.047, 239.7559, 324.5587, 239.8405, 294.0883,
+            238.2178, 239.3757, 239.5458
+          ],
+          "relativePerformance": 1.09,
+          "isFastest": false
+        },
+        {
+          "function": "mapFilterWithSparseCheck",
+          "totalTime": 240.0641,
+          "avgTime": 2.4006,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 238.4174,
+          "maxTime": 243.7737,
+          "stdDev": 1.8511,
+          "rawTimes": [
+            243.7737, 239.2545, 238.4174, 239.0865, 239.6064, 239.517, 238.7287,
+            243.6345, 239.2455, 239.3767
+          ],
+          "relativePerformance": 1.03,
+          "isFastest": false
+        },
+        {
+          "function": ".reduce()",
+          "totalTime": 238.8315,
+          "avgTime": 2.3883,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 234.9894,
+          "maxTime": 242.105,
+          "stdDev": 2.7707,
+          "rawTimes": [
+            242.105, 241.1904, 241.1892, 241.2715, 240.9757, 236.9532, 239.1686,
+            235.4768, 234.9948, 234.9894
+          ],
+          "relativePerformance": 1.02,
+          "isFastest": false
+        },
+        {
+          "function": ".filter().map()",
+          "totalTime": 233.5231,
+          "avgTime": 2.3352,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 231.8839,
+          "maxTime": 238.4899,
+          "stdDev": 1.9333,
+          "rawTimes": [
+            233.8023, 232.537, 232.5086, 238.4899, 235.5378, 233.196, 232.099,
+            232.572, 231.8839, 232.6048
           ],
           "relativePerformance": 1,
           "isFastest": true
-        },
-        {
-          "function": "native .reduce()",
-          "totalTime": 246.08,
-          "avgTime": 2.4608,
-          "iterations": 100,
-          "runs": 10,
-          "minTime": 241.7028,
-          "maxTime": 250.0632,
-          "stdDev": 3.6134,
-          "rawTimes": [
-            249.4194, 249.4578, 250.0632, 249.7447, 249.5414, 243.8692,
-            242.8385, 241.7028, 241.7676, 242.3953
-          ],
-          "relativePerformance": 1.01,
-          "isFastest": false
-        },
-        {
-          "function": "native filter().map()",
-          "totalTime": 258.2481,
-          "avgTime": 2.5825,
-          "iterations": 100,
-          "runs": 10,
-          "minTime": 237.8324,
-          "maxTime": 430.9822,
-          "stdDev": 57.5939,
-          "rawTimes": [
-            238.299, 237.8324, 238.2653, 241.2659, 430.9822, 241.8905, 239.4827,
-            238.2936, 237.9019, 238.2673
-          ],
-          "relativePerformance": 1.06,
-          "isFastest": false
         }
       ],
-      "timestamp": "2025-11-14T23:47:15.218Z"
+      "timestamp": "2025-11-15T01:25:35.795Z"
     },
     {
       "testName": "Complex Objects - Complex User Objects",
@@ -603,54 +763,70 @@
       "results": [
         {
           "function": "mapFilter",
-          "totalTime": 381.1255,
-          "avgTime": 3.8113,
+          "totalTime": 376.0019,
+          "avgTime": 3.76,
           "iterations": 100,
           "runs": 10,
-          "minTime": 376.1123,
-          "maxTime": 387.062,
-          "stdDev": 2.8413,
+          "minTime": 370.0934,
+          "maxTime": 399.8975,
+          "stdDev": 8.3618,
           "rawTimes": [
-            387.062, 379.3059, 380.4149, 380.5762, 380.8446, 378.9472, 383.5745,
-            380.969, 383.448, 376.1123
+            373.6289, 374.644, 371.5615, 370.9848, 399.8975, 378.5737, 374.7294,
+            375.6075, 370.2983, 370.0934
+          ],
+          "relativePerformance": 1.05,
+          "isFastest": false
+        },
+        {
+          "function": "mapFilterWithSparseCheck",
+          "totalTime": 371.4145,
+          "avgTime": 3.7141,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 369.8769,
+          "maxTime": 373.8096,
+          "stdDev": 1.4094,
+          "rawTimes": [
+            371.5802, 369.8769, 372.5111, 370.2237, 372.273, 370.1965, 370.2235,
+            373.8096, 373.3503, 370.1002
+          ],
+          "relativePerformance": 1.04,
+          "isFastest": false
+        },
+        {
+          "function": ".reduce()",
+          "totalTime": 367.8745,
+          "avgTime": 3.6787,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 366.2767,
+          "maxTime": 372.0426,
+          "stdDev": 1.6785,
+          "rawTimes": [
+            368.2404, 366.8871, 369.6157, 367.2262, 372.0426, 366.9174,
+            366.2767, 367.1422, 366.3858, 368.0112
           ],
           "relativePerformance": 1.03,
           "isFastest": false
         },
         {
-          "function": "native .reduce()",
-          "totalTime": 405.7325,
-          "avgTime": 4.0573,
+          "function": ".filter().map()",
+          "totalTime": 358.4595,
+          "avgTime": 3.5846,
           "iterations": 100,
           "runs": 10,
-          "minTime": 378.1867,
-          "maxTime": 634.1386,
-          "stdDev": 76.1794,
+          "minTime": 356.0444,
+          "maxTime": 361.5547,
+          "stdDev": 1.6695,
           "rawTimes": [
-            378.2869, 386.1622, 382.3123, 378.1867, 378.8565, 383.4157,
-            378.8829, 634.1386, 378.2773, 378.8057
-          ],
-          "relativePerformance": 1.1,
-          "isFastest": false
-        },
-        {
-          "function": "native filter().map()",
-          "totalTime": 369.3314,
-          "avgTime": 3.6933,
-          "iterations": 100,
-          "runs": 10,
-          "minTime": 365.872,
-          "maxTime": 373.4189,
-          "stdDev": 2.6831,
-          "rawTimes": [
-            367.688, 366.0272, 371.034, 369.651, 366.1167, 365.872, 373.1739,
-            373.4189, 370.4835, 369.8492
+            358.3783, 359.243, 357.3968, 357.8733, 356.7558, 361.5547, 356.0444,
+            357.3815, 360.8935, 359.074
           ],
           "relativePerformance": 1,
           "isFastest": true
         }
       ],
-      "timestamp": "2025-11-14T23:47:22.822Z"
+      "timestamp": "2025-11-15T01:25:45.631Z"
     },
     {
       "testName": "Complex Objects - Deep Nested Objects",
@@ -663,54 +839,70 @@
       "results": [
         {
           "function": "mapFilter",
-          "totalTime": 186.63,
-          "avgTime": 1.8663,
+          "totalTime": 177.4492,
+          "avgTime": 1.7745,
           "iterations": 100,
           "runs": 10,
-          "minTime": 173.7504,
-          "maxTime": 284.2472,
-          "stdDev": 32.5871,
+          "minTime": 176.3191,
+          "maxTime": 180.181,
+          "stdDev": 1.0088,
           "rawTimes": [
-            176.433, 173.9083, 284.2472, 173.7775, 179.5386, 176.9403, 174.4633,
-            176.0541, 173.7504, 177.1875
+            180.181, 176.5885, 177.3972, 176.3191, 177.3412, 176.9986, 177.3612,
+            176.8756, 177.6887, 177.7413
           ],
-          "relativePerformance": 1.07,
+          "relativePerformance": 1.02,
           "isFastest": false
         },
         {
-          "function": "native .reduce()",
-          "totalTime": 174.3116,
-          "avgTime": 1.7431,
+          "function": "mapFilterWithSparseCheck",
+          "totalTime": 177.7327,
+          "avgTime": 1.7773,
           "iterations": 100,
           "runs": 10,
-          "minTime": 170.7296,
-          "maxTime": 184.1453,
-          "stdDev": 3.6031,
+          "minTime": 177.2951,
+          "maxTime": 178.3702,
+          "stdDev": 0.3562,
           "rawTimes": [
-            175.1507, 175.489, 170.7296, 184.1453, 172.17, 172.9238, 173.9662,
-            171.5428, 174.6353, 172.363
+            178.2563, 177.6881, 178.3702, 177.3151, 177.5926, 177.2951,
+            177.7193, 177.9242, 177.339, 177.8272
+          ],
+          "relativePerformance": 1.02,
+          "isFastest": false
+        },
+        {
+          "function": ".reduce()",
+          "totalTime": 173.4476,
+          "avgTime": 1.7345,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 171.8835,
+          "maxTime": 181.2162,
+          "stdDev": 2.6611,
+          "rawTimes": [
+            172.78, 173.1402, 171.8835, 181.2162, 173.995, 172.1205, 172.9278,
+            172.1585, 172.1447, 172.1099
           ],
           "relativePerformance": 1,
           "isFastest": true
         },
         {
-          "function": "native filter().map()",
-          "totalTime": 186.2618,
-          "avgTime": 1.8626,
+          "function": ".filter().map()",
+          "totalTime": 174.2589,
+          "avgTime": 1.7426,
           "iterations": 100,
           "runs": 10,
-          "minTime": 171.4874,
-          "maxTime": 275.7971,
-          "stdDev": 30.5311,
+          "minTime": 170.3562,
+          "maxTime": 187.6991,
+          "stdDev": 5.6904,
           "rawTimes": [
-            275.7971, 192.5204, 171.5665, 171.9295, 171.889, 171.4874, 172.2616,
-            183.0684, 177.5877, 174.5107
+            171.3243, 171.431, 171.4235, 170.9484, 171.4936, 187.6991, 182.8674,
+            174.0302, 171.0155, 170.3562
           ],
-          "relativePerformance": 1.07,
+          "relativePerformance": 1,
           "isFastest": false
         }
       ],
-      "timestamp": "2025-11-14T23:47:34.634Z"
+      "timestamp": "2025-11-15T01:26:00.735Z"
     },
     {
       "testName": "Function Call Overhead - Single Parameter Functions",
@@ -723,54 +915,70 @@
       "results": [
         {
           "function": "mapFilter",
-          "totalTime": 22.2209,
-          "avgTime": 0.2222,
+          "totalTime": 24.1103,
+          "avgTime": 0.2411,
           "iterations": 100,
           "runs": 10,
-          "minTime": 21.3271,
-          "maxTime": 28.1867,
-          "stdDev": 2.0037,
+          "minTime": 22.792,
+          "maxTime": 30.3835,
+          "stdDev": 2.113,
           "rawTimes": [
-            28.1867, 21.511, 21.4619, 21.3814, 22.209, 21.4158, 21.6634,
-            21.6825, 21.3697, 21.3271
+            30.3835, 23.2827, 24.1162, 23.459, 23.3789, 22.792, 23.3744,
+            23.5464, 23.38, 23.39
           ],
-          "relativePerformance": 1.2,
+          "relativePerformance": 1.3,
           "isFastest": false
         },
         {
-          "function": "native .reduce()",
-          "totalTime": 21.8382,
-          "avgTime": 0.2184,
+          "function": "mapFilterWithSparseCheck",
+          "totalTime": 24.3388,
+          "avgTime": 0.2434,
           "iterations": 100,
           "runs": 10,
-          "minTime": 18.6815,
-          "maxTime": 24.8758,
-          "stdDev": 2.9321,
+          "minTime": 23.1416,
+          "maxTime": 30.2233,
+          "stdDev": 2.0031,
           "rawTimes": [
-            24.8758, 24.8055, 24.5238, 24.8118, 24.7972, 19.417, 18.6815,
-            18.6963, 18.8109, 18.9626
+            30.2233, 24.1659, 24.3242, 24.2995, 23.5962, 23.35, 23.3903,
+            23.3593, 23.1416, 23.5379
           ],
-          "relativePerformance": 1.18,
+          "relativePerformance": 1.32,
           "isFastest": false
         },
         {
-          "function": "native filter().map()",
-          "totalTime": 18.4714,
-          "avgTime": 0.1847,
+          "function": ".reduce()",
+          "totalTime": 21.9327,
+          "avgTime": 0.2193,
           "iterations": 100,
           "runs": 10,
-          "minTime": 18.0889,
-          "maxTime": 19.2654,
-          "stdDev": 0.4056,
+          "minTime": 18.525,
+          "maxTime": 25.5328,
+          "stdDev": 3.1468,
           "rawTimes": [
-            18.84, 18.2463, 19.2654, 18.1022, 18.6085, 18.0889, 18.0979, 18.979,
-            18.3539, 18.1315
+            24.5943, 24.7369, 24.9344, 25.5328, 25.524, 19.0548, 18.9366,
+            18.525, 18.7067, 18.7816
+          ],
+          "relativePerformance": 1.19,
+          "isFastest": false
+        },
+        {
+          "function": ".filter().map()",
+          "totalTime": 18.4786,
+          "avgTime": 0.1848,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 18.2315,
+          "maxTime": 18.7267,
+          "stdDev": 0.1629,
+          "rawTimes": [
+            18.6858, 18.4691, 18.4005, 18.7267, 18.4277, 18.4113, 18.3416,
+            18.717, 18.3746, 18.2315
           ],
           "relativePerformance": 1,
           "isFastest": true
         }
       ],
-      "timestamp": "2025-11-14T23:47:40.211Z"
+      "timestamp": "2025-11-15T01:26:07.902Z"
     },
     {
       "testName": "Function Call Overhead - Dual Parameter Functions",
@@ -783,54 +991,70 @@
       "results": [
         {
           "function": "mapFilter",
-          "totalTime": 15.6566,
-          "avgTime": 0.1566,
+          "totalTime": 17.1325,
+          "avgTime": 0.1713,
           "iterations": 100,
           "runs": 10,
-          "minTime": 15.4828,
-          "maxTime": 15.8807,
-          "stdDev": 0.13,
+          "minTime": 16.9183,
+          "maxTime": 17.6284,
+          "stdDev": 0.249,
           "rawTimes": [
-            15.8807, 15.5353, 15.4828, 15.6874, 15.5315, 15.5731, 15.7769,
-            15.7468, 15.5595, 15.7922
+            17.5738, 16.9924, 17.0559, 16.9183, 16.9201, 16.9365, 17.6284,
+            17.1445, 17.1727, 16.9827
           ],
-          "relativePerformance": 1.51,
+          "relativePerformance": 1.76,
           "isFastest": false
         },
         {
-          "function": "native .reduce()",
-          "totalTime": 11.011,
-          "avgTime": 0.1101,
+          "function": "mapFilterWithSparseCheck",
+          "totalTime": 17.6342,
+          "avgTime": 0.1763,
           "iterations": 100,
           "runs": 10,
-          "minTime": 9.8258,
-          "maxTime": 14.8765,
-          "stdDev": 1.4957,
+          "minTime": 17.4437,
+          "maxTime": 18.0982,
+          "stdDev": 0.2114,
           "rawTimes": [
-            10.4668, 11.1675, 11.1215, 14.8765, 12.389, 10.42, 9.8833, 10.1319,
-            9.8258, 9.828
+            17.5503, 17.5099, 17.4437, 17.6561, 18.0982, 17.8998, 17.7745,
+            17.4746, 17.4452, 17.4894
           ],
-          "relativePerformance": 1.06,
+          "relativePerformance": 1.81,
           "isFastest": false
         },
         {
-          "function": "native filter().map()",
-          "totalTime": 10.3792,
-          "avgTime": 0.1038,
+          "function": ".reduce()",
+          "totalTime": 9.7514,
+          "avgTime": 0.0975,
           "iterations": 100,
           "runs": 10,
-          "minTime": 10.3269,
-          "maxTime": 10.4932,
-          "stdDev": 0.0445,
+          "minTime": 9.7303,
+          "maxTime": 9.814,
+          "stdDev": 0.0234,
           "rawTimes": [
-            10.4932, 10.3755, 10.4026, 10.382, 10.3461, 10.399, 10.3269,
-            10.3685, 10.3565, 10.3421
+            9.814, 9.7333, 9.7522, 9.7303, 9.7379, 9.7342, 9.7418, 9.752,
+            9.7523, 9.7657
           ],
           "relativePerformance": 1,
           "isFastest": true
+        },
+        {
+          "function": ".filter().map()",
+          "totalTime": 10.3192,
+          "avgTime": 0.1032,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 10.2466,
+          "maxTime": 10.5099,
+          "stdDev": 0.0842,
+          "rawTimes": [
+            10.433, 10.2466, 10.2919, 10.2485, 10.2755, 10.2929, 10.3641,
+            10.5099, 10.2662, 10.2633
+          ],
+          "relativePerformance": 1.06,
+          "isFastest": false
         }
       ],
-      "timestamp": "2025-11-14T23:47:40.858Z"
+      "timestamp": "2025-11-15T01:26:08.820Z"
     },
     {
       "testName": "Function Call Overhead - Minimal Overhead",
@@ -843,54 +1067,70 @@
       "results": [
         {
           "function": "mapFilter",
-          "totalTime": 26.8033,
-          "avgTime": 0.268,
+          "totalTime": 29.7925,
+          "avgTime": 0.2979,
           "iterations": 100,
           "runs": 10,
-          "minTime": 26.3439,
-          "maxTime": 27.8441,
-          "stdDev": 0.4124,
+          "minTime": 28.7786,
+          "maxTime": 30.413,
+          "stdDev": 0.4423,
           "rawTimes": [
-            27.8441, 26.4595, 26.76, 27.0316, 26.7464, 26.9144, 26.3439,
-            26.9164, 26.3818, 26.6347
+            30.2821, 30.413, 29.811, 29.5888, 29.5235, 29.9124, 29.695, 28.7786,
+            30.1943, 29.726
           ],
-          "relativePerformance": 1.05,
+          "relativePerformance": 1.2,
           "isFastest": false
         },
         {
-          "function": "native .reduce()",
-          "totalTime": 27.2563,
-          "avgTime": 0.2726,
+          "function": "mapFilterWithSparseCheck",
+          "totalTime": 30.5453,
+          "avgTime": 0.3055,
           "iterations": 100,
           "runs": 10,
-          "minTime": 26.8058,
-          "maxTime": 28.2951,
-          "stdDev": 0.4916,
+          "minTime": 29.8805,
+          "maxTime": 31.2671,
+          "stdDev": 0.4349,
           "rawTimes": [
-            27.3996, 26.8058, 27.131, 26.8146, 27.1225, 26.8159, 27.0829,
-            28.2951, 27.052, 28.0433
+            31.1552, 30.5759, 30.2767, 31.2671, 30.3009, 30.8893, 30.572,
+            30.5415, 29.8805, 29.9935
           ],
-          "relativePerformance": 1.07,
+          "relativePerformance": 1.23,
           "isFastest": false
         },
         {
-          "function": "native filter().map()",
-          "totalTime": 25.4324,
-          "avgTime": 0.2543,
+          "function": ".reduce()",
+          "totalTime": 28.6606,
+          "avgTime": 0.2866,
           "iterations": 100,
           "runs": 10,
-          "minTime": 24.8035,
-          "maxTime": 27.2633,
-          "stdDev": 0.8064,
+          "minTime": 27.711,
+          "maxTime": 29.028,
+          "stdDev": 0.4444,
           "rawTimes": [
-            27.2633, 26.7196, 25.1059, 24.8439, 24.8035, 24.8912, 24.9829,
-            25.3762, 25.2298, 25.1076
+            29.0262, 27.711, 27.888, 28.7505, 28.8185, 28.7995, 29.0061, 29.028,
+            28.8279, 28.7502
+          ],
+          "relativePerformance": 1.15,
+          "isFastest": false
+        },
+        {
+          "function": ".filter().map()",
+          "totalTime": 24.9165,
+          "avgTime": 0.2492,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 24.7639,
+          "maxTime": 25.4017,
+          "stdDev": 0.1787,
+          "rawTimes": [
+            24.9965, 24.8903, 24.7957, 24.7705, 24.814, 24.7639, 24.8727,
+            25.4017, 24.979, 24.8806
           ],
           "relativePerformance": 1,
           "isFastest": true
         }
       ],
-      "timestamp": "2025-11-14T23:47:41.230Z"
+      "timestamp": "2025-11-15T01:26:09.370Z"
     },
     {
       "testName": "Function Call Overhead - Function.length Checking",
@@ -903,54 +1143,70 @@
       "results": [
         {
           "function": "mapFilter",
-          "totalTime": 21.6641,
-          "avgTime": 0.2166,
+          "totalTime": 24.3111,
+          "avgTime": 0.2431,
           "iterations": 100,
           "runs": 10,
-          "minTime": 21.1824,
-          "maxTime": 22.6075,
-          "stdDev": 0.4334,
+          "minTime": 23.1446,
+          "maxTime": 31.2907,
+          "stdDev": 2.3437,
           "rawTimes": [
-            22.6075, 21.509, 21.1824, 21.6566, 21.9392, 22.2107, 21.5498,
-            21.3897, 21.3265, 21.2699
+            24.1857, 23.6859, 23.2116, 23.4137, 23.4223, 23.477, 23.485,
+            23.7944, 23.1446, 31.2907
           ],
-          "relativePerformance": 1.2,
+          "relativePerformance": 1.31,
           "isFastest": false
         },
         {
-          "function": "native .reduce()",
-          "totalTime": 18.7627,
-          "avgTime": 0.1876,
+          "function": "mapFilterWithSparseCheck",
+          "totalTime": 24.1674,
+          "avgTime": 0.2417,
           "iterations": 100,
           "runs": 10,
-          "minTime": 18.5892,
-          "maxTime": 19.2295,
-          "stdDev": 0.1808,
+          "minTime": 23.5347,
+          "maxTime": 24.6176,
+          "stdDev": 0.3098,
           "rawTimes": [
-            19.2295, 18.7055, 18.6846, 18.5892, 18.6147, 18.9456, 18.7052,
-            18.7429, 18.7489, 18.6608
+            24.6176, 24.3931, 24.3987, 24.2182, 24.504, 23.9615, 24.1392,
+            23.9235, 23.9832, 23.5347
+          ],
+          "relativePerformance": 1.3,
+          "isFastest": false
+        },
+        {
+          "function": ".reduce()",
+          "totalTime": 19.2446,
+          "avgTime": 0.1924,
+          "iterations": 100,
+          "runs": 10,
+          "minTime": 19.0073,
+          "maxTime": 19.4662,
+          "stdDev": 0.1412,
+          "rawTimes": [
+            19.4662, 19.1025, 19.2739, 19.228, 19.0073, 19.1093, 19.4344,
+            19.3743, 19.2067, 19.2437
           ],
           "relativePerformance": 1.04,
           "isFastest": false
         },
         {
-          "function": "native filter().map()",
-          "totalTime": 17.9843,
-          "avgTime": 0.1798,
+          "function": ".filter().map()",
+          "totalTime": 18.5424,
+          "avgTime": 0.1854,
           "iterations": 100,
           "runs": 10,
-          "minTime": 17.8552,
-          "maxTime": 18.337,
-          "stdDev": 0.1583,
+          "minTime": 18.105,
+          "maxTime": 18.9878,
+          "stdDev": 0.251,
           "rawTimes": [
-            17.9858, 17.8732, 18.337, 17.9067, 17.8552, 17.9248, 18.243,
-            17.8716, 17.905, 17.9412
+            18.9878, 18.5637, 18.6675, 18.5277, 18.8773, 18.4742, 18.4679,
+            18.5285, 18.105, 18.2241
           ],
           "relativePerformance": 1,
           "isFastest": true
         }
       ],
-      "timestamp": "2025-11-14T23:47:42.069Z"
+      "timestamp": "2025-11-15T01:26:10.567Z"
     }
   ]
 }
