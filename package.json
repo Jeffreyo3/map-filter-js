@@ -23,11 +23,12 @@
   },
   "scripts": {
     "build": "tsc",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
     "start": "node dist/index.js",
     "prepublishOnly": "npm run build",
     "test": "jest --no-cache --coverage --testPathPattern=src/",
     "test:watch": "jest --watchAll --testPathPattern=src/",
-    "test:bench": "jest --no-cache --coverage --testPathPattern=benchmarks/"
+    "test:bench": "npm run build && npm run build:cjs && jest --no-cache --testPathPattern=benchmarks/"
   },
   "main": "dist/index.js",
   "repository": {

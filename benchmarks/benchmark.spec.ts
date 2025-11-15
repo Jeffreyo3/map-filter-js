@@ -1,6 +1,7 @@
 import { writeFileSync } from "fs";
 import path from "path";
-import mapFilter from "../src/index";
+// Import the built CommonJS JavaScript file for maximum performance accuracy
+const mapFilter = require("../dist-cjs/index.js").default;
 
 // Reducer-based filter-map implementation for comparison
 function reduce<T, U>(
@@ -19,6 +20,7 @@ function reduce<T, U>(
 // Global results collector
 const benchmarkResults: any = {
   timestamp: new Date().toISOString(),
+  buildType: "production (built JS)",
   tests: [],
 };
 
@@ -34,7 +36,7 @@ function benchmark(fn: () => void, iterations: number = 1): number {
   return totalTime;
 }
 
-// Function to run benchmarks and collect results (runs each test 5 times and reports averages)
+// Function to run benchmarks and collect results (runs each test (n) times and reports averages)
 function runBenchmarkSuite(
   testName: string,
   testParams: any,
@@ -78,7 +80,8 @@ function runBenchmarkSuite(
     const coefficientOfVariation = totalTime > 0 ? stdDev / totalTime : 0;
 
     // Robust Score (lower = better performance with consistency)
-    const consistency = Math.max(0.01, 1 - Math.min(coefficientOfVariation, 1)); // Prevent division by zero
+    // Math.max(0.01...) is to prevent division by zero in case of perfect consistency (unlikely)
+    const consistency = Math.max(0.01, 1 - Math.min(coefficientOfVariation, 1));
     const robustScore = median / consistency;
 
     results.results.push({
@@ -107,7 +110,6 @@ function runBenchmarkSuite(
   benchmarkResults.tests.push(results);
 }
 
-// Function to save results to JSON file
 function saveBenchmarkResults(): void {
   const outputPath = path.join(
     process.cwd(),
@@ -118,17 +120,20 @@ function saveBenchmarkResults(): void {
 
   try {
     writeFileSync(outputPath, jsonOutput);
+    console.log(`\n📊 Production benchmark results saved to: ${outputPath}`);
   } catch (error) {
     // If we can't write to file, output the full results to console
     // so they're not lost in environments where file writing isn't allowed
-    console.log("\n=== BENCHMARK RESULTS ===");
+    console.log(
+      `\n=== ${benchmarkResults.buildType.toUpperCase()} BENCHMARK RESULTS ===`
+    );
     console.log("(File write failed, outputting results to console)");
     console.log(jsonOutput);
     console.log("=== END BENCHMARK RESULTS ===\n");
   }
 }
 
-describe("Performance Benchmarks", () => {
+describe("Production Performance Benchmarks (Built JS)", () => {
   afterAll(() => {
     saveBenchmarkResults();
   });
